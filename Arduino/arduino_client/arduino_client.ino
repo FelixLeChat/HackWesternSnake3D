@@ -54,6 +54,9 @@ boolean UpState[5][5][5] ={
   {false, false, false, false, false} } 
 };
 
+// Thread
+//static struct pt pt1;
+
 //-------------------------------------------------------------------------------------------//
 void setup() {
   // set the digital pin as output:
@@ -69,6 +72,7 @@ void setup() {
   pinMode(Etage3, OUTPUT);
   pinMode(Etage4, OUTPUT);
   
+  //PT_INIT(&pt1);
   Serial.begin(9600);
 }
 
@@ -76,21 +80,18 @@ void setup() {
 void loop()
 { 
   UpState[4][4][4] = true;
-  if (Serial.available()) 
+  UpState[0][0][0] = true;
+  /*if (Serial.available()) 
   {
     light(Serial.readString());
-  }
+  }*/
   lightCube();
 }
 
 void light(String n){
- 
-  UpState[4][4][0] = true;
-  resetAllUpState(); 
-  int i = 0;
+  resetAllUpState();
   
-  /*if(n.length() == 1 && (n[0] >= '0' && n[0] <= '9'))
-    lightNumber(n[0] - '0');*/
+  int i = 0;
   
   if(n.length() < 3)
     return;
@@ -256,102 +257,4 @@ void lightDEL(int x, int y, int z){
  
  delayMicroseconds(delayus);
  resetLights();
-}
-
-void lightNumber(int number)
-{
-  switch(number)
-  {
-    case 8:
-      UpState[0][2][2] = true;
-    case 0:
-      UpState[0][1][0] = true;
-      UpState[0][1][1] = true;
-      UpState[0][1][2] = true;
-      UpState[0][1][3] = true;
-      UpState[0][1][4] = true;
-      UpState[0][3][0] = true;
-      UpState[0][3][1] = true;
-      UpState[0][3][2] = true;
-      UpState[0][3][3] = true;
-      UpState[0][3][4] = true;
-      UpState[0][2][0] = true;
-      UpState[0][2][4] = true;
-      break;
-    case 1:
-      UpState[0][1][0] = true;
-      UpState[0][2][0] = true;
-      UpState[0][3][0] = true;
-      UpState[0][2][1] = true;
-      UpState[0][2][2] = true;
-      UpState[0][2][3] = true;
-      UpState[0][2][4] = true;
-      UpState[0][1][3] = true;
-      break;
-    case 2:
-      UpState[0][1][0] = true;
-      UpState[0][2][0] = true;
-      UpState[0][3][0] = true;
-      UpState[0][1][1] = true;
-      UpState[0][1][2] = true;
-      UpState[0][2][2] = true;
-      UpState[0][3][2] = true;
-      UpState[0][3][3] = true;
-      UpState[0][1][4] = true;
-      UpState[0][2][4] = true;
-      UpState[0][3][4] = true;
-      break;
-    case 3:
-      UpState[0][1][0] = true;
-      UpState[0][2][0] = true;
-      UpState[0][3][0] = true;
-      UpState[0][3][1] = true;
-      UpState[0][1][2] = true;
-      UpState[0][2][2] = true;
-      UpState[0][3][2] = true;
-      UpState[0][3][3] = true;
-      UpState[0][1][4] = true;
-      UpState[0][2][4] = true;
-      UpState[0][3][4] = true;
-      break;
-    case 4:
-      UpState[0][3][0] = true;
-      UpState[0][3][1] = true;
-      UpState[0][3][2] = true;
-      UpState[0][3][3] = true;
-      UpState[0][3][4] = true;
-      UpState[0][2][2] = true;
-      UpState[0][1][2] = true;
-      UpState[0][1][3] = true;
-      UpState[0][1][4] = true;
-      break;
-    case 6:
-      UpState[0][1][1] = true;
-    case 5:
-      UpState[0][1][0] = true;
-      UpState[0][2][0] = true;
-      UpState[0][3][0] = true;
-      UpState[0][1][3] = true;
-      UpState[0][1][2] = true;
-      UpState[0][2][2] = true;
-      UpState[0][3][2] = true;
-      UpState[0][3][1] = true;
-      UpState[0][1][4] = true;
-      UpState[0][2][4] = true;
-      UpState[0][3][4] = true;
-      break;
-    case 9:
-      UpState[0][2][2] = true;
-      UpState[0][1][2] = true;
-      UpState[0][1][3] = true;
-    case 7:
-      UpState[0][3][0] = true;
-      UpState[0][3][1] = true;
-      UpState[0][3][2] = true;
-      UpState[0][3][3] = true;
-      UpState[0][3][4] = true;
-      UpState[0][2][4] = true;
-      UpState[0][1][4] = true;
-      break;
-  }
 }
