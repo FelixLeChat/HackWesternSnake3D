@@ -84,6 +84,9 @@ setInterval(function()
 {
   if(canWrite && lifes >= 0)
   {
+  	if(snake.length == 0)
+  		snake = defaultSnake;
+
   	var snakeCopy = snake.slice(0);
 
   	if(hasPoint)
