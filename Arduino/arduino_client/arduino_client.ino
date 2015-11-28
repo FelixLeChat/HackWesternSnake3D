@@ -1,5 +1,3 @@
-#include <pt.h>
-
 // set pin numbers:
 // Enable the selection on another Decoder
 const int DecoderEnabled =  12;
@@ -56,8 +54,8 @@ boolean UpState[5][5][5] ={
   {false, false, false, false, false} } 
 };
 
-int minutes = 0;
-int heures = 0;
+// Thread
+//static struct pt pt1;
 
 //-------------------------------------------------------------------------------------------//
 void setup() {
@@ -73,10 +71,10 @@ void setup() {
   pinMode(Etage2, OUTPUT);
   pinMode(Etage3, OUTPUT);
   pinMode(Etage4, OUTPUT);
+  
+  //PT_INIT(&pt1);
+  Serial.begin(9600);
 }
-
-// Thread
-static struct pt pt1;
 
 // Loop principale---------------------------------------------------------------------------//
 void loop()
@@ -84,7 +82,33 @@ void loop()
   UpState[0][0][0] = true;
   while(true)
   {
+    if (Serial.available()) 
+    {
+      light(Serial.readString());
+    }
     lightCube();
+  }
+}
+
+void light(String n){  
+  int i = 0;
+  while(i < sizeof(n)/(sizeof(char)*3))
+  {
+    if(isValidData(n.substring(i*3, i*3+3)))
+      UpState[n[i*3] - '0'][ n[i*3+1] - '0'][ n[i*3+2] - '0'] = true;
+    i++;
+  }
+}
+
+boolean isValidData(String data)
+{
+  if(sizeof(data) != 3)
+    return false;
+    
+  for(int i=0; i < 3; i++)
+  {
+    if((data[i] <'0') || (data[i] > '4'))
+    return false;
   }
 }
 
