@@ -79,6 +79,7 @@ void setup() {
 // Loop principale---------------------------------------------------------------------------//
 void loop()
 { 
+  UpState[4][4][4] = true;
   if (Serial.available()) 
   {
     light(Serial.readString());
@@ -88,18 +89,18 @@ void loop()
 
 void light(String n){
  
+  UpState[4][4][0] = true;
   resetAllUpState(); 
   int i = 0;
   
-  if(n.length() == 1 && (n[0] >= '0' && n[0] <= '9'))
-    lightNumber(n[0] - '0');
+  /*if(n.length() == 1 && (n[0] >= '0' && n[0] <= '9'))
+    lightNumber(n[0] - '0');*/
   
   if(n.length() < 3)
     return;
     
   while(i < (n.length()/3))
   {
-    UpState[0][0][i+1] = true;
     if(isValidData(n.substring(i*3, i*3+3)))
       UpState[n[i*3] - '0'][ n[i*3+1] - '0'][ n[i*3+2] - '0'] = true;
     i++;

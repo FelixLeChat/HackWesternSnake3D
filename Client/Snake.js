@@ -49,7 +49,23 @@ setInterval(function()
   	snake.forEach(function(entry) {
     	total +=  "" + entry.x + entry.y + entry.z;
 	});
+
 	serialPort.write(total);
 	console.log("sending : %s", total);
+
+	// advance snake
+	snake.forEach(function(entry) {
+    	
+    	entry.x += direction.x;
+    	entry.y += direction.y;
+    	entry.z += direction.z;
+
+    	if(entry.x > 5)
+    		entry.x = 0;
+    	if(entry.y > 5)
+    		entry.y = 0;
+    	if(entry.z > 5)
+    		entry.z = 0;
+	});
   }
-}, 5000);
+}, 3000);
