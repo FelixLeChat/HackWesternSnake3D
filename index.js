@@ -49,8 +49,15 @@ wss.on('connection', function connection(ws) {
             break;
       }
 
-      if(received)
-        ws.send("vote compiled");
+        if(received)
+        {
+            ws.send("vote compiled");
+            wss.clients.forEach(function each(client) {
+                client.send(message);
+            }
+        }
+        else
+            ws.send("vote not compiled : " + message + " is invalid");
   });
 
     ws.send('Connected to voting channel');
@@ -61,6 +68,16 @@ wss.on('connection', function connection(ws) {
 setInterval(function()
 {
     wss.clients.forEach(function each(client) {
-        client.send("Total : Up - " + results.up + ", Down " + results.down);
+        client.send("Total : Up - " + results.up + ", Down " + results.down + ", Left " + results.left + ", Right " + results.right + ", Forward " + results.forward + ", Backward " + results.backward);
+        resetVote();
     });
 }, 10000);
+
+function resetVote() {
+    results.up = 0;
+    results.down = 0;
+    results.left = 0;
+    results.right = 0;
+    results.forward = 0;
+    results.backward = 0;
+}
