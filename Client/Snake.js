@@ -60,11 +60,11 @@ setInterval(function()
     	entry.y += direction.y;
     	entry.z += direction.z;
 
-    	if(entry.x > 5)
+    	if(entry.x > 4)
     		entry.x = 0;
-    	if(entry.y > 5)
+    	if(entry.y > 4)
     		entry.y = 0;
-    	if(entry.z > 5)
+    	if(entry.z > 4)
     		entry.z = 0;
 	});
   }
