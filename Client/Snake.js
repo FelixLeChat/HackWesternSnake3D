@@ -41,14 +41,15 @@ wsConnected.on('connect', function() {
 	});
 });
 
-
+var total = "";
 // Update snake head
 setInterval(function()
 {
   
   if(canWrite)
   {
-  	var total = "";
+  	total = "";
+
   	snake.forEach(function(entry) {
     	total +=  "" + entry.x + entry.y + entry.z;
 	});
@@ -60,7 +61,7 @@ setInterval(function()
 	console.log("sending : %s", total);
 
 	// advance snake
-	for(i= snake.length; i > 0; i --)
+	for(i= snake.length - 1; i > 0; i --)
 	{
 		snake[i] = snake[i-1];
 	}
