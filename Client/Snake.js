@@ -46,7 +46,7 @@ setInterval(function()
 {
   if(canWrite)
   {
-  	for(var i=snake.length; i>0;i--)
+  	for(var i=snake.length-1; i>0;i--)
   	{
   		snake[i] = snake[i-1];
   	}
