@@ -92,7 +92,7 @@ void light(String n){
   int i = 0;
   
   if(n.length() == 1)
-    lightNumber(n - '0');
+    lightNumber(n[0] - '0');
   
   if(n.length() < 3)
     return;
@@ -348,6 +348,9 @@ void lightNumber(int number)
       UpState[0][3][4] = true;
       UpState[0][2][4] = true;
       UpState[0][1][4] = true;
+      break;
+    default:
+      UpState[4][4][4] = true;
       break;
   }
 }
