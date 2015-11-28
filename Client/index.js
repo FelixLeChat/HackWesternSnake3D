@@ -1,6 +1,6 @@
 var SerialPort = require("serialport").SerialPort;
 var Myo = require("myo");
-var PyShell = require("python-shell")
+//var PyShell = require("python-shell")
 
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
