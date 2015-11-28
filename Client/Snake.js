@@ -47,7 +47,7 @@ setInterval(function()
   {
   	var total = "";
   	snake.forEach(function(entry) {
-    	total += entry.x + entry.y + entry.z;
+    	total +=  "" + entry.x + entry.y + entry.z;
 	});
 	serialPort.write(total);
 	console.log("sending : %s", total);
