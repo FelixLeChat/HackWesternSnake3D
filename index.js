@@ -61,6 +61,6 @@ wss.on('connection', function connection(ws) {
 setInterval(function()
 {
     wss.clients.forEach(function each(client) {
-        client.send("Total : Up - %s, Down %s", results.up, results.down);
+        client.send("Total : Up - " + results.up + ", Down " + results.down);
     });
 }, 10000);
