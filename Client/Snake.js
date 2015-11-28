@@ -137,7 +137,7 @@ setInterval(function()
 
 	end = snakeCopy[snakeCopy.length-1];
 
-	if(IsHittingItself())
+	if(isHittingItself())
 	{
 		console.log(snake);
 		lifes --;
@@ -157,14 +157,14 @@ setInterval(function()
 	}
 	else
 	{
-			serialPort.write(total);
-			console.log("sending : %s", total);
+		serialPort.write(total);
+		console.log("sending : %s", total);
 	}
   }
 }, 3000);
 
 
-function IsHittingItself()
+function isHittingItself()
 {
 	var head = snake[0];
 
