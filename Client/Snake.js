@@ -136,16 +136,22 @@ setInterval(function()
   	// Add point to achieve
 	total += "" + point.x + point.y + point.z;
 
-	serialPort.write(total);
-	console.log("sending : %s", total);
+
 
 	end = snakeCopy[snakeCopy.length-1];
 
-	if(IsHittingItself)
+	if(IsHittingItself())
 	{
 		lifes --;
 		serialPort.write(lifes);
+		snake = new Array();
 		snake = defaultSnake;
+		console.log("lifes left : %s", lifes);
+	}
+	else
+	{
+			serialPort.write(total);
+			console.log("sending : %s", total);
 	}
   }
 }, 3000);
