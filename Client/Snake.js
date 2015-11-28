@@ -1,5 +1,4 @@
 var SerialPort = require("serialport").SerialPort;
-<<<<<<< HEAD
 var spawn = require('child_process').spawn,
     ls    = spawn('python',['/Myo4Linux/sample/test_myo.py']);
 
