@@ -1,17 +1,20 @@
 var SerialPort = require("serialport").SerialPort;
 var PythonShell = require('python-shell');
-var Pyshell = new PythonShell('Myo4Linux/sample/test_myo.py');
-
+var pyshell = new PythonShell('Myo4Linux/sample/test_myo.py');
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
 });
 
 var canWrite = false;
 
-Pyshell.on('message', function (message) {
+
+
+
+pyshell.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
   console.log(message);
 });
+
 
 serialPort.on("open", function () {
   console.log('open Serial Port');
@@ -149,7 +152,7 @@ setInterval(function()
 
 		if(lifes == 0)
 		{
-			Pyshell.end(function(err){
+			pyshell.end(function(err){
 				if(err) throw err;
 				console.log("finished Python script");
 			});
