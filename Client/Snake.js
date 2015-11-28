@@ -14,7 +14,7 @@ serialPort.on("open", function () {
 
 // the snake is a array of position (head at 0)
 var snake = [{x:0,y:1,z:0},{x:0,y:0,z:0}];
-var direction = {0,1,0};
+var direction = {x:0,y:1,z:0};
 
 
 var ws = require("nodejs-websocket");
@@ -45,6 +45,10 @@ setInterval(function()
 {
   if(canWrite)
   {
-  	var total = 
+  	var total = "";
+  	snake.forEach(function(entry) {
+    	total += entry.x + entry.y + entry.z;
+	});
+	serialPort.write(total);
   }
 }, 1000);

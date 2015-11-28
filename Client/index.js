@@ -1,5 +1,5 @@
 var SerialPort = require("serialport").SerialPort;
-var Myo = require("node-myo").MyoDiscoveryAgent;
+var Myo = require("myo");
 
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
