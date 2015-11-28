@@ -1,6 +1,6 @@
 var SerialPort = require("serialport").SerialPort;
 var PythonShell = require('python-shell');
-var pyshell = new PythonShell('Myo4Linux/sample/test_myo.py');
+var pyshell = new PythonShell('Myo4Linux/lib/device_listener.py');
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
 });
