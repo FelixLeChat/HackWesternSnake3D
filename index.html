@@ -22,12 +22,14 @@
             var ws = new WebSocket(host);
             ws.onmessage = function (event) {
                 var li = document.createElement('li');
-                li.innerHTML = event.data;
+                data = JSON.parse(event.data);
                 document.querySelector('#votes').appendChild(li);
+                document.querySelector('#up').innerHTML = data.up;
             };
         </script>
     </head>
     <body>
+        <p id="up"></p>
         <h1>Snake</h1>
         <ul id='votes'></ul>
     </body>
