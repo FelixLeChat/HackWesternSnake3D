@@ -1,10 +1,17 @@
 var SerialPort = require("serialport").SerialPort;
+var Myo = require("myo");
 
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
 });
 
 var canWrite = false;
+
+Myo.connect("com.westernhacks.ledbox");
+
+Myo.on("connected", function(data, timestamp) {
+  console.log("Myo successfully connected. Data: " + JSON.stringify(data) + ". Timestamp: " + timestamp + ".");
+});
 
 serialPort.on("open", function () {
   console.log('open Serial Port');
