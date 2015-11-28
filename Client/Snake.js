@@ -59,12 +59,11 @@ setInterval(function(){
 	console.log("sending : %s", total);
 
 	// advance snake
-	console.log(snake);
+	var head = snake[0];
 	for(i = snake.length-1; i >= 1; i--) {
 		snake[i-1] = snake[i];
-		console.log(snake);
 	}
-	console.log(snake);
+	snake[0] = head;
 
 	// next position for snake head
 	snake[0].x += direction.x;
