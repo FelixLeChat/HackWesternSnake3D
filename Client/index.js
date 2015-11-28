@@ -1,4 +1,3 @@
-var SerialPort = require("serialport").SerialPort;
 var ws = require("nodejs-websocket");
 var wsConnected = ws.connect("ws://websocket-nodejs.herokuapp.com", function(wss)
 {
@@ -7,16 +6,17 @@ var wsConnected = ws.connect("ws://websocket-nodejs.herokuapp.com", function(wss
 
 wsConnected.on('connect', function() {
 	console.log('Connection established');
-	
+
 	wsConnected.on('text', function incoming(message) {
-	console.log('received: %s', message);
+		// when text is received from Websocket Server
+		console.log('received: %s', message);
+	});
 });
 
-wsConnected.sendText("test");
 
-});
+var SerialPort = require("serialport").SerialPort;
 
-/*var serialPort = new SerialPort("/dev/ttyACM0", {
+var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
 });
 
@@ -31,7 +31,4 @@ serialPort.on("open", function () {
     console.log('err ' + err);
     console.log('results ' + results);
   });
-});*/
-
-
-
+});
