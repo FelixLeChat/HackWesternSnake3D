@@ -26,11 +26,34 @@ wsConnected.on('connect', function() {
 
 		console.log('received: %s', message);
 
-		if(canWrite)
+		switch(message)
+		{
+			case "up":
+				direction = {x:0,y:0,z:1};
+				break;
+			case "down":
+				direction = {x:0,y:1,z:-1};
+				break;
+			case "left":
+				direction = {x:0,y:-1,z:0};
+				break;
+			case "right":
+				direction = {x:0,y:1,z:0};
+				break;
+			case "forward":
+				direction = {x:1,y:0,z:0};
+				break;
+			case "backward":
+				direction = {x:-1,y:0,z:0};
+				break;
+		};
+
+		// Forward to arduino
+		/*if(canWrite)
 			serialPort.write(message, function(err, results) {
 		    	console.log('err ' + err);
 		    	console.log('results ' + results);
-			});
+			});*/
 	});
 });
 
@@ -38,7 +61,8 @@ wsConnected.on('connect', function() {
 // the snake is a array of position (head at 0)
 var snake = [{x:0,y:2,z:0},{x:0,y:1,z:0},{x:0,y:0,z:0}];
 var direction = {x:0,y:1,z:0};
-var point = {x:2,y:2,z:2};
+var point = {x:0,y:0,z:4};
+var hasPoint = false;
 
 // Update snake head
 var total = "";
@@ -55,9 +79,20 @@ setInterval(function()
   		snake[i].z = snakeCopy[i-1].z;
   	}
 
+  	if(hasPoint)
+  	{
+  		snake.push(snakeCopy[snakeCopy.length-1]);
+  	}
+
   	snake[0].x += direction.x;
   	snake[0].y += direction.y;
   	snake[0].z += direction.z;
+
+  	if(snake[0].x == point.x && snake[0].y == point.y && snake[0].z == point.z)
+  	{
+  		hasPoint = true;
+  		point = {x:Math.floor(Math.random() * 4),y:Math.floor(Math.random() * 4),z:Math.floor(Math.random() * 4)};
+  	}
 
   	// check for overflow
 	snake.forEach(function(part) {
