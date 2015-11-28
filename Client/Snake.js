@@ -82,7 +82,7 @@ var lifes = 9;
 var total = "";
 setInterval(function()
 {
-  if(canWrite)
+  if(canWrite && lifes >= 0)
   {
   	var snakeCopy = snake.slice(0);
 
@@ -142,11 +142,13 @@ setInterval(function()
 
 	if(IsHittingItself())
 	{
+		console.log(snake);
 		lifes --;
 		serialPort.write("" + lifes);
 		snake = [];
 		snake = defaultSnake;
 		console.log("lifes left : %s", lifes);
+		console.log(snake);
 	}
 	else
 	{
