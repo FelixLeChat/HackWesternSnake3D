@@ -11,21 +11,22 @@ server.listen(port)
 
 console.log("http server listening on %d", port)
 
-var wss = new WebSocketServer({server: server})
+var ws = new WebSocketServer({server: server})
 console.log("websocket server created")
 
-wss.on("connection", function(ws) {
+ws.on('open', function open() {
+  console.log('connected');
+  ws.send(Date.now().toString(), {mask: true});
+});
 
-  console.log("websocket connection open")
+ws.on('close', function close() {
+  console.log('disconnected');
+});
 
-  	ws.on("close", function() {
-		console.log("websocket connection close")
-	});
+ws.on('message', function message(data, flags) {
+  console.log('Roundtrip time: ' + (Date.now() - parseInt(data)) + 'ms', flags);
 
-	ws.on('text', function(message) {
-    	console.log('received: %s', message);
-    	wss.clients.forEach(function each(client) {
-		  client.send(message);
-		});
-    });
+  setTimeout(function timeout() {
+    ws.send(Date.now().toString(), {mask: true});
+  }, 500);
 });
