@@ -54,7 +54,7 @@ wss.on('connection', function connection(ws) {
             ws.send("vote compiled");
             wss.clients.forEach(function each(client) {
                 client.send(message);
-            };
+            });
         }
         else
             ws.send("vote not compiled : " + message + " is invalid");
