@@ -62,10 +62,8 @@ setInterval(function(){
 
 	var oldSnake = snake;
 
-	for(var i=0; i < snake.length -1; i++)
-	{
-		snake[i+1] = oldSnake[i];
-	}
+	snake[2] = snake[1];
+	snake[1] = snake[0];
 
 	snake[0].x += direction.x;
     snake[0].y += direction.y;
