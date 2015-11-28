@@ -37,7 +37,7 @@ wsConnected.on('connect', function() {
 	});
 });
 
-var total = "";
+/*var total = "";
 var snake = [{x:0,y:2,z:0},{x:0,y:1,z:0},{x:0,y:0,z:0}];
 var direction = {x:0,y:1,z:0};
 var point = {x:2,y:2,z:2};
@@ -84,7 +84,7 @@ setInterval(function(){
     	if(snake[0].y > 4)
     		snake[0].y = 0;
     	if(snake[0].z > 4)
-    		snake[0].z = 0;*/
+    		snake[0].z = 0;
 
   }
-}, 3000);
+}, 3000);*/
