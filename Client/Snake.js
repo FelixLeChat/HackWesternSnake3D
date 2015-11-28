@@ -69,11 +69,14 @@ wsConnected.on('connect', function() {
 
 
 // the snake is a array of position (head at 0)
-var snake = [{x:0,y:2,z:0},{x:0,y:1,z:0},{x:0,y:0,z:0}];
+var defaultSnake = [{x:0,y:2,z:0},{x:0,y:1,z:0},{x:0,y:0,z:0}];
+var snake = defaultSnake;
 var direction = {x:1,y:0,z:0};
 var point = {x:0,y:4,z:0};
 var end = {x:0,y:0,z:0};
 var hasPoint = false;
+
+var lifes = 9;
 
 // Update snake head
 var total = "";
@@ -139,3 +142,15 @@ setInterval(function()
 	end = snakeCopy[snakeCopy.length-1];
   }
 }, 3000);
+
+
+function IsHittingItself()
+{
+	var head = snake[0];
+
+	for(var i=1; i < snake.length; i++)
+		if(snake[i].x == head.x && snake[i].y == head.y && snake[i].z == head.z)
+			return true;
+
+	return false;
+}
