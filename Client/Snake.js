@@ -47,30 +47,8 @@ setInterval(function(){
   
   if(canWrite){
 
-  	var nextSnake = snake.slice(0);
-
-  	console.log(nextSnake);
-
   	total = "";
 
-  	for(var i=snake.length -1; i>0; i--){
-  		nextSnake[i-1] = snake[i];
-  		console.log(i);
-  	}
-
-  	nextSnake[0].x = nextSnake[0].x + direction.x;
-  	nextSnake[0].y = nextSnake[0].y + direction.y;
-  	nextSnake[0].z = nextSnake[0].z + direction.z;
-
-  	nextSnake.forEach(function(part){
-  		total+= "" + part.x + part.y + part.z;
-  	});
-  	serialPort.write(total);
-
-
-  	snake = nextSnake;
-  	/*
-  	total = "";
 
   	snake.forEach(function(entry) {
     	total +=  "" + entry.x + entry.y + entry.z;
@@ -83,8 +61,8 @@ setInterval(function(){
 	console.log("sending : %s", total);
 
 	// advance snake
-	var head = snake[0];
-	for(i = snake.length-1; i >= 1; i--) {
+	/*var head = snake[0];
+	for(var i = snake.length-1; i >= 1; i--) {
 		snake[i-1] = snake[i];
 	}
 	snake[0] = head;
