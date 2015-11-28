@@ -7,7 +7,7 @@ var serialPort = new SerialPort("/dev/ttyACM0", {
 
 var canWrite = false;
 
-P/*ythonShell.run('/Myo4Linux/lib/device_lister.py', function (err) {
+/*PythonShell.run('/Myo4Linux/lib/device_lister.py', function (err) {
   if (err) throw err;
   console.log('device listener ready');
 });
