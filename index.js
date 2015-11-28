@@ -1,40 +1,40 @@
-/*var express = require('express');
-var app = express();
+var WebSocketServer = require("ws").Server
+var http = require("http")
+var express = require("express")
+var app = express()
+var port = process.env.PORT || 5000
 
-app.set('port', (process.env.PORT || 5000));
+app.use(express.static(__dirname + "/"))
 
-app.use(express.static(__dirname + '/public'));
+var server = http.createServer(app)
+server.listen(port)
 
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+console.log("http server listening on %d", port)
 
-app.get('/', function(request, response) {
-  response.render('pages/index');
-});
+var wss = new WebSocketServer({server: server})
+console.log("websocket server created")
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});*/
+wss.on("connection", function(ws) {
+  var id = setInterval(function() {
+    ws.send(JSON.stringify(new Date()), function() {  })
+  }, 1000)
 
+  console.log("websocket connection open")
 
-var ws = require("nodejs-websocket");
+	ws.on('message', function incoming(message) {
+	    console.log('received: %s', message);
+	    broadcast(message);
+	  });
 
-var server = ws.createServer(function (conn) 
-{
-    conn.on("text", function (str) 
-    {
-        broadcast(str);
-    });
+  ws.on("close", function() {
+    console.log("websocket connection close")
+    clearInterval(id)
+  })
 
-    conn.on("close", function (code, reason) 
-    {
-    });
+})
 
-}).listen(5000, "websocket-nodejs.herokuapp.com");
-
-function broadcast(str) {
-	server.connections.forEach(function (connection) {
-		connection.sendText(str)
-	})
-}
+wss.broadcast = function broadcast(data) {
+  wss.clients.forEach(function each(client) {
+    client.send(data);
+  });
+};
