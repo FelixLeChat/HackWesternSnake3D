@@ -53,7 +53,7 @@ setInterval(function(){
 
   	total = "";
 
-  	for(i=nextSnake.lentgh; i>0; i--){
+  	for(var i=nextSnake.lenght; i>0; i--){
   		nextSnake[i-1] = snake[i];
   		console.log(i);
   	}
