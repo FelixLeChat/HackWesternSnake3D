@@ -68,7 +68,7 @@ setInterval(function(){
   	serialPort.write(total);
 
 
-
+  	snake = nextSnake;
   	/*
   	total = "";
 
