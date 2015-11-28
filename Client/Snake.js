@@ -7,6 +7,11 @@ var serialPort = new SerialPort("/dev/ttyACM0", {
 
 var canWrite = false;
 
+PythonShell.run('Myo4Linux/sample/test_myo.py', function(error){
+
+	if(error) throw error;
+	console.log("finished myo");
+});
 
 PythonShell.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
