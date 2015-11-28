@@ -60,8 +60,9 @@ setInterval(function(){
 
 	// advance snake
 	console.log(snake);
-	for(i = snake.length-1; i > 0; i--) {
+	for(i = snake.length-1; i >= 1; i--) {
 		snake[i-1] = snake[i];
+		console.log(snake);
 	}
 	console.log(snake);
 
