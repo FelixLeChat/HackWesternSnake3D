@@ -106,7 +106,7 @@ setInterval(function()
   	if(snake[0].x == point.x && snake[0].y == point.y && snake[0].z == point.z)
   	{
   		hasPoint = true;
-  		point = {x:Math.floor(Math.random() * 4),y:Math.floor(Math.random() * 4),z:Math.floor(Math.random() * 4)};
+  		//point = {x:Math.floor(Math.random() * 4),y:Math.floor(Math.random() * 4),z:Math.floor(Math.random() * 4)};
   	}
 
   	// check for overflow
@@ -140,6 +140,13 @@ setInterval(function()
 	console.log("sending : %s", total);
 
 	end = snakeCopy[snakeCopy.length-1];
+
+	if(IsHittingItself)
+	{
+		lifes --;
+		serialport.write(lifes);
+		snake = defaultSnake;
+	}
   }
 }, 3000);
 
