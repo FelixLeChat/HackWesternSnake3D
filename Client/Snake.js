@@ -60,7 +60,19 @@ setInterval(function(){
 	serialPort.write(total);
 	console.log("sending : %s", total);
 
+	var oldSnake = snake;
+
+	for(var i=0; i < snake.length; i++)
+	{
+		snake[i+1] = oldSnake[i];
+	}
+
+	snake[0].x += direction.x;
+    snake[0].y += direction.y;
+    snake[0].z += direction.z;
+
 	// advance snake
+
 	/*var head = snake[0];
 	for(var i = snake.length-1; i >= 1; i--) {
 		snake[i-1] = snake[i];
