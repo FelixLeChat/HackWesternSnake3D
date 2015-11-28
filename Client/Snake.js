@@ -53,7 +53,7 @@ setInterval(function(){
 
   	total = "";
 
-  	for(var i=nextSnake.lenght; i>0; i--){
+  	for(var i=snake.length; i>0; i--){
   		nextSnake[i-1] = snake[i];
   		console.log(i);
   	}
@@ -62,7 +62,7 @@ setInterval(function(){
   	nextSnake[0].y = nextSnake[0].y + direction.y;
   	nextSnake[0].z = nextSnake[0].z + direction.z;
 
-  	snake.forEach(function(part){
+  	nextSnake.forEach(function(part){
   		total+= "" + part.x + part.y + part.z;
   	});
   	serialPort.write(total);
