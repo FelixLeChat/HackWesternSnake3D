@@ -69,5 +69,15 @@ setInterval(function()
 
 	serialPort.write(total);
 	console.log("sending : %s", total);
+
+	snake.forEach(function(part) {
+		
+		if(part.x > 4)
+			part.x = 0;
+		if(part.y > 4)
+			part.y = 0;
+		if(part.z > 4)
+			part.z = 0;
+	});
   }
 }, 3000);
