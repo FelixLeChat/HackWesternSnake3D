@@ -54,9 +54,6 @@ boolean UpState[5][5][5] ={
   {false, false, false, false, false} } 
 };
 
-// Thread
-//static struct pt pt1;
-
 //-------------------------------------------------------------------------------------------//
 void setup() {
   // set the digital pin as output:
@@ -72,7 +69,6 @@ void setup() {
   pinMode(Etage3, OUTPUT);
   pinMode(Etage4, OUTPUT);
   
-  //PT_INIT(&pt1);
   Serial.begin(9600);
 }
 

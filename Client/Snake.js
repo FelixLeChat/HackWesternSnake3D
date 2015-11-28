@@ -1,6 +1,7 @@
 var SerialPort = require("serialport").SerialPort;
 
 var serialPort = new SerialPort("/dev/ttyACM0", {
+//var serialPort = new SerialPort("/dev/COM28", {
   baudrate: 9600
 });
 
@@ -15,6 +16,7 @@ serialPort.on("open", function () {
 // the snake is a array of position (head at 0)
 var snake = [{x:0,y:1,z:0},{x:0,y:0,z:0}];
 var direction = {x:0,y:1,z:0};
+var point = {x:2,y:2,z:2};
 
 
 var ws = require("nodejs-websocket");
@@ -43,6 +45,7 @@ wsConnected.on('connect', function() {
 // Update snake head
 setInterval(function()
 {
+  
   if(canWrite)
   {
   	var total = "";
@@ -50,22 +53,29 @@ setInterval(function()
     	total +=  "" + entry.x + entry.y + entry.z;
 	});
 
+  	// Add point to achieve
+	total += "" + point.x + point.y + point.z;
+
 	serialPort.write(total);
 	console.log("sending : %s", total);
 
 	// advance snake
-	snake.forEach(function(entry) {
-    	
-    	entry.x += direction.x;
-    	entry.y += direction.y;
-    	entry.z += direction.z;
+	for(i= snake.length; i > 0; i --)
+	{
+		snake[i] = snake[i-1];
+	}
 
-    	if(entry.x > 4)
-    		entry.x = 0;
-    	if(entry.y > 4)
-    		entry.y = 0;
-    	if(entry.z > 4)
-    		entry.z = 0;
-	});
+	// next position for snake head
+	snake[0].x += direction.x;
+    snake[0].y += direction.y;
+    snake[0].z += direction.z;
+
+    	if(snake[0].x > 4)
+    		snake[0].x = 0;
+    	if(snake[0].y > 4)
+    		snake[0].y = 0;
+    	if(snake[0].z > 4)
+    		snake[0].z = 0;
+
   }
 }, 3000);
