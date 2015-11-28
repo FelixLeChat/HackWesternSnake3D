@@ -51,7 +51,7 @@ var point = {x:2,y:2,z:2};
 // Update snake head
 setInterval(function(){
   
-  if(canWrite){
+  if(true){
 
   	total = "";
 
@@ -79,6 +79,10 @@ setInterval(function(){
     		snake[0].y = 0;
     	if(snake[0].z > 4)
     		snake[0].z = 0;
+
+    wss.clients.forEach(function each(client) {
+	    client.send(total);
+	  });
 
   }
 }, 3000);
