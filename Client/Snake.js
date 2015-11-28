@@ -92,6 +92,7 @@ setInterval(function()
   	if(hasPoint)
   	{
   		snake.push(snakeCopy[snakeCopy.length-1]);
+  		hasPoint = false;
   	}
 
   	snake[0].x += direction.x;
