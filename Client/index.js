@@ -35,7 +35,7 @@ wsConnected.on('connect', function() {
 		console.log('received: %s', message);
 
 		if(canWrite)
-			serialPort.write("0,0,0", function(err, results) {
+			serialPort.write("001002", function(err, results) {
 		    	console.log('err ' + err);
 		    	console.log('results ' + results);
 			});
