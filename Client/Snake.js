@@ -10,23 +10,16 @@ ls.stderr.on('data', function (data) {
 console.log('stderr: ' + data);
 });
 
-=======
+/*
 var PythonShell = require('python-shell');
 var pyshell = new PythonShell('Myo4Linux/lib/device_listener.py');
 >>>>>>> origin/master
+*/
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
 });
 
 var canWrite = false;
-
-
-
-
-pyshell.on('message', function (message) {
-  // received a message sent from the Python script (a simple "print" statement)
-  console.log(message);
-});
 
 
 serialPort.on("open", function () {
