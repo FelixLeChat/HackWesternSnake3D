@@ -14,10 +14,6 @@ serialPort.on("open", function () {
 
 
 // the snake is a array of position (head at 0)
-var snake = [{x:0,y:2,z:0},{x:0,y:1,z:0},{x:0,y:0,z:0}];
-var direction = {x:0,y:1,z:0};
-var point = {x:2,y:2,z:2};
-
 
 var ws = require("nodejs-websocket");
 var wsConnected = ws.connect("ws://websocket-nodejs.herokuapp.com", function(wss)
@@ -42,13 +38,15 @@ wsConnected.on('connect', function() {
 });
 
 var total = "";
+var snake = [{x:0,y:2,z:0},{x:0,y:1,z:0},{x:0,y:0,z:0}];
+var direction = {x:0,y:1,z:0};
+var point = {x:2,y:2,z:2};
 // Update snake head
 setInterval(function(){
   
   if(canWrite){
 
   	total = "";
-
 
   	snake.forEach(function(entry) {
     	total +=  "" + entry.x + entry.y + entry.z;
@@ -60,16 +58,15 @@ setInterval(function(){
 	serialPort.write(total);
 	console.log("sending : %s", total);
 
-	var oldSnake = snake;
-
-	snake[2] = snake[1];
-	snake[1] = snake[0];
-
-	snake[0].x += direction.x;
-    snake[0].y += direction.y;
-    snake[0].z += direction.z;
+	for(var i = 0; i <= snake.length; i++)
+	{
+		snake[i] = snake[i+1];
+	}
+	snake[i] = snake[0]
 
 	// advance snake
+	//snake[2]
+	//snake[1] = new {x:snake[0].x,y:snake[0].y,z:snake[0].z};
 
 	/*var head = snake[0];
 	for(var i = snake.length-1; i >= 1; i--) {
