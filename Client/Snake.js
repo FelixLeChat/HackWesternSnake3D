@@ -165,12 +165,9 @@ setInterval(function()
 
 function isHittingItself()
 {
-	var head = snake[0];
-
 	for(var i=1; i < snake.length; i++)
-		if(snake[i].x == head.x && snake[i].y == head.y && snake[i].z == head.z)
+		if(snake[i].x == snake[0].x && snake[i].y == snake[0].y && snake[i].z == snake[0].z)
 			return true;
-
 	return false;
 }
 
