@@ -46,6 +46,19 @@ var total = "";
 setInterval(function(){
   
   if(canWrite){
+
+  	total = "";
+
+  	for(i=snake.length-1;i>0;i--){
+  		snake[i-1] = snake[i];
+  	}
+
+  	snake.forEach(function(part){
+  		total+= "" + part.x + part.y + part.z;
+  	});
+  	serialPort.write(total);
+
+  	/*
   	total = "";
 
   	snake.forEach(function(entry) {
@@ -75,7 +88,7 @@ setInterval(function(){
     	if(snake[0].y > 4)
     		snake[0].y = 0;
     	if(snake[0].z > 4)
-    		snake[0].z = 0;
+    		snake[0].z = 0;*/
 
   }
 }, 3000);
