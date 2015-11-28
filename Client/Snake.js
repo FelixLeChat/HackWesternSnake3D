@@ -1,5 +1,6 @@
 var SerialPort = require("serialport").SerialPort;
 var PythonShell = require('python-shell');
+var Pyshell = new PythonShell('Myo4Linux/sample/test_myo.py');
 
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
@@ -7,8 +8,7 @@ var serialPort = new SerialPort("/dev/ttyACM0", {
 
 var canWrite = false;
 
-
-PythonShell.on('message', function (message) {
+Pyshell.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
   console.log(message);
 });
@@ -79,7 +79,7 @@ var lifes = 9;
 var total = "";
 setInterval(function()
 {
-  if(canWrite)
+  if(canWrite && lifes >= 0)
   {
   	var snakeCopy = snake.slice(0);
 
@@ -139,11 +139,21 @@ setInterval(function()
 
 	if(isHittingItself())
 	{
+		console.log(snake);
 		lifes --;
 		serialPort.write("" + lifes);
 		snake = [];
 		snake = defaultSnake;
 		console.log("lifes left : %s", lifes);
+		console.log(snake);
+
+		if(lifes == 0)
+		{
+			Pyshell.end(function(err){
+				if(err) throw err;
+				console.log("finished Python script");
+			});
+		}
 	}
 	else
 	{
