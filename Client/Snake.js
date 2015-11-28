@@ -1,4 +1,5 @@
 var SerialPort = require("serialport").SerialPort;
+<<<<<<< HEAD
 var spawn = require('child_process').spawn,
     ls    = spawn('python',['/Myo4Linux/sample/test_myo.py']);
 
@@ -10,6 +11,10 @@ ls.stderr.on('data', function (data) {
 console.log('stderr: ' + data);
 });
 
+=======
+var PythonShell = require('python-shell');
+var pyshell = new PythonShell('Myo4Linux/lib/device_listener.py');
+>>>>>>> origin/master
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
 });
@@ -17,10 +22,13 @@ var serialPort = new SerialPort("/dev/ttyACM0", {
 var canWrite = false;
 
 
-PythonShell.on('message', function (message) {
+
+
+pyshell.on('message', function (message) {
   // received a message sent from the Python script (a simple "print" statement)
   console.log(message);
 });
+
 
 serialPort.on("open", function () {
   console.log('open Serial Port');
@@ -88,8 +96,11 @@ var lifes = 9;
 var total = "";
 setInterval(function()
 {
-  if(canWrite)
+  if(canWrite && lifes >= 0)
   {
+  	if(snake.length == 0)
+  		snake = defaultSnake.slice(0,3);
+
   	var snakeCopy = snake.slice(0);
 
   	if(hasPoint)
@@ -146,30 +157,38 @@ setInterval(function()
 
 	end = snakeCopy[snakeCopy.length-1];
 
-	if(IsHittingItself())
+	if(isHittingItself())
 	{
+		console.log(snake);
 		lifes --;
 		serialPort.write("" + lifes);
 		snake = [];
-		snake = defaultSnake;
+		//snake = defaultSnake;
 		console.log("lifes left : %s", lifes);
+		console.log(snake);
+
+		if(lifes == 0)
+		{
+		}
 	}
 	else
 	{
-			serialPort.write(total);
-			console.log("sending : %s", total);
+		serialPort.write(total);
+		console.log("sending : %s", total);
 	}
   }
 }, 3000);
 
 
-function IsHittingItself()
+function isHittingItself()
 {
-	var head = snake[0];
-
 	for(var i=1; i < snake.length; i++)
-		if(snake[i].x == head.x && snake[i].y == head.y && snake[i].z == head.z)
+		if(snake[i].x == snake[0].x && snake[i].y == snake[0].y && snake[i].z == snake[0].z)
 			return true;
-
 	return false;
 }
+
+/*pyshell.on(function(err){
+	//if(err) throw err;
+	console.log("finished Python script");
+});*/
