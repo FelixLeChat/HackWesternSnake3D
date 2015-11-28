@@ -92,11 +92,12 @@ void loop()
 
 void light(String n){  
   int i = 0;
-  while(i < sizeof(n)/(sizeof(char)*3))
+  while(i < sizeof(n)-1)
   {
-    if(isValidData(n.substring(i*3, i*3+3)))
-      UpState[n[i*3] - '0'][ n[i*3+1] - '0'][ n[i*3+2] - '0'] = true;
-    i++;
+    UpState[0][0][i+1] = true;
+    /*if(isValidData(n.substring(i*3, i*3+3)))
+      UpState[5][ n[i*3+1] - '0'][ n[i*3+2] - '0'] = true;
+    i++;*/
   }
 }
 
