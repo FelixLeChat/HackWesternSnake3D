@@ -83,17 +83,17 @@ setInterval(function()
   {
   	var snakeCopy = snake.slice(0);
 
+  	if(hasPoint)
+  	{
+  		snake.push({x:end.x,y:end.y,z:end.z});
+  		hasPoint = false;
+  	}
+
   	for(var i=snake.length-1; i>0;i--)
   	{
   		snake[i].x = snakeCopy[i-1].x;
   		snake[i].y = snakeCopy[i-1].y;
   		snake[i].z = snakeCopy[i-1].z;
-  	}
-
-  	if(hasPoint)
-  	{
-  		snake.push(end);
-  		hasPoint = false;
   	}
 
   	snake[0].x += direction.x;
