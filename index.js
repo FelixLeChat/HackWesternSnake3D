@@ -68,9 +68,9 @@ wss.on('connection', function connection(ws) {
 setInterval(function()
 {
     wss.clients.forEach(function each(client) {
-        client.send("Total : Up - " + results.up + ", Down " + results.down + ", Left " + results.left + ", Right " + results.right + ", Forward " + results.forward + ", Backward " + results.backward);
-        resetVote();
+        client.send("Total : Up - " + results.up + ", Down " + results.down + ", Left " + results.left + ", Right " + results.right + ", Forward " + results.forward + ", Backwards " + results.backward);
     });
+    resetVote();
 }, 10000);
 
 function resetVote() {
