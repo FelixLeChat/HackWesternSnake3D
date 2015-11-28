@@ -79,8 +79,6 @@ void setup() {
 // Loop principale---------------------------------------------------------------------------//
 void loop()
 { 
-  lightNumber(6);
-  
   if (Serial.available()) 
   {
     resetAllUpState();
@@ -263,6 +261,8 @@ void lightNumber(int number)
 {
   switch(number)
   {
+    case 8:
+      UpState[0][2][2] = true;
     case 0:
       UpState[0][1][0] = true;
       UpState[0][1][1] = true;
@@ -339,11 +339,15 @@ void lightNumber(int number)
       UpState[0][2][4] = true;
       UpState[0][3][4] = true;
       break;
+    case 9:
+      UpState[0][2][2] = true;
+      UpState[0][1][2] = true;
+      UpState[0][1][3] = true;
     case 7:
       UpState[0][3][0] = true;
-      UpState[0][3][2] = true;
       UpState[0][3][1] = true;
-      UpState[0][3][4] = true;
+      UpState[0][3][2] = true;
+      UpState[0][3][3] = true;
       UpState[0][3][4] = true;
       UpState[0][2][4] = true;
       UpState[0][1][4] = true;

@@ -1,5 +1,4 @@
 var SerialPort = require("serialport").SerialPort;
-var Myo = require("node-myo").MyoDiscoveryAgent;
 
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
@@ -7,25 +6,15 @@ var serialPort = new SerialPort("/dev/ttyACM0", {
 
 var canWrite = false;
 
-Myo.connect("com.westernhacks.ledbox");
-
-Myo.on("connected", function(data, timestamp) {
-  console.log("Myo successfully connected. Data: " + JSON.stringify(data) + ". Timestamp: " + timestamp + ".");
-});
-
 serialPort.on("open", function () {
   console.log('open Serial Port');
   canWrite = true;
-
-  /*serialPort.on('data', function(data) {
-    console.log('data received: ' + data);
-  });*/
-
-  /*serialPort.write(new Buffer('4','ascii'), function(err, results) {
-    console.log('err ' + err);
-    console.log('results ' + results);
-  });*/
 });
+
+
+// the snake is a array of position (head at 0)
+var snake = [{x:0,y:1,z:0},{x:0,y:0,z:0}];
+var direction = {0,1,0};
 
 
 var ws = require("nodejs-websocket");
@@ -38,7 +27,8 @@ wsConnected.on('connect', function() {
 	console.log('Connection established');
 
 	wsConnected.on('text', function incoming(message) {
-		// when text is received from Websocket Server
+
+
 		console.log('received: %s', message);
 
 		if(canWrite)
@@ -48,3 +38,13 @@ wsConnected.on('connect', function() {
 			});
 	});
 });
+
+
+// Update snake head
+setInterval(function()
+{
+  if(canWrite)
+  {
+  	var total = 
+  }
+}, 1000);
