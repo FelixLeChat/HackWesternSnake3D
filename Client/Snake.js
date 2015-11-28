@@ -152,10 +152,6 @@ setInterval(function()
 
 		if(lifes == 0)
 		{
-			pyshell.end(function(err){
-				if(err) throw err;
-				console.log("finished Python script");
-			});
 		}
 	}
 	else
@@ -177,3 +173,8 @@ function isHittingItself()
 
 	return false;
 }
+
+pyshell.end(function(err){
+	//if(err) throw err;
+	console.log("finished Python script");
+});
