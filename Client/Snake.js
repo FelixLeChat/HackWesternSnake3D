@@ -1,7 +1,15 @@
 var SerialPort = require("serialport").SerialPort;
-var spawn = require('child_process').spawn,
-    ls    = spawn('python',['/Myo4Linux/sample/test_myo.py']);
+var spawn = require('child_process').spawn;
+var PythonShell = require('python-shell');
+var pyshell = new PythonShell('/Myo4Linux/sample/test_myo.py');
+pyshell.on('message', function (message) {
+  // received a message sent from the Python script (a simple "print" statement)
+  console.log(message);
+});
 
+//var ls = spawn('python',['/Myo4Linux/sample/test_myo.py']);
+
+/*
 ls.stdout.on('data', function (data) {
 console.log('stdout: ' + data);
 });
@@ -9,7 +17,7 @@ console.log('stdout: ' + data);
 ls.stderr.on('data', function (data) {
 console.log('stderr: ' + data);
 });
-
+*/
 /*
 var PythonShell = require('python-shell');
 var pyshell = new PythonShell('Myo4Linux/lib/device_listener.py');
