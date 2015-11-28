@@ -65,7 +65,7 @@ wss.on('connection', function connection(ws) {
 
 });
 
-JSON.encode(obj);
+
 setInterval(function()
 {
     wss.clients.forEach(function each(client) {
