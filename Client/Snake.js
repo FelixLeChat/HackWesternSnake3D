@@ -46,9 +46,13 @@ setInterval(function()
 {
   if(canWrite)
   {
+  	var snakeCopy = snake.slice(0);
+
   	for(var i=snake.length-1; i>0;i--)
   	{
-  		snake[i] = snake[i-1];
+  		snake[i].x = snakeCopy[i-1].x;
+  		snake[i].y = snakeCopy[i-1].y;
+  		snake[i].z = snakeCopy[i-1].z;
   	}
 
   	snake[0].x += direction.x;
