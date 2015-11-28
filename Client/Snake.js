@@ -53,8 +53,8 @@ setInterval(function(){
 
   	total = "";
 
-  	for(i=1;i<=snake.lentgh;i++){
-  		nextSnake[i] = snake[i-1];
+  	for(i=snake.lentgh; i>0; i--){
+  		nextSnake[i-1] = snake[i];
   	}
 
   	nextSnake[0].x = snake[0].x + direction.x;
