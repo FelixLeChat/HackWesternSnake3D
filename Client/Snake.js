@@ -171,7 +171,7 @@ function isHittingItself()
 	return false;
 }
 
-pyshell.end(function(err){
+/*pyshell.on(function(err){
 	//if(err) throw err;
 	console.log("finished Python script");
-});
+});*/
