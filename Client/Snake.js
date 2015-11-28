@@ -1,5 +1,14 @@
 var SerialPort = require("serialport").SerialPort;
-var PythonShell = require('python-shell');
+var spawn = require('child_process').spawn,
+    ls    = spawn('python',['/Myo4Linux/sample/test_myo.py']);
+
+ls.stdout.on('data', function (data) {
+console.log('stdout: ' + data);
+});
+
+ls.stderr.on('data', function (data) {
+console.log('stderr: ' + data);
+});
 
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
