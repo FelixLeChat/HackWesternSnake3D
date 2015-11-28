@@ -54,9 +54,6 @@ boolean UpState[5][5][5] ={
   {false, false, false, false, false} } 
 };
 
-// Thread
-//static struct pt pt1;
-
 //-------------------------------------------------------------------------------------------//
 void setup() {
   // set the digital pin as output:
@@ -72,7 +69,6 @@ void setup() {
   pinMode(Etage3, OUTPUT);
   pinMode(Etage4, OUTPUT);
   
-  //PT_INIT(&pt1);
   Serial.begin(9600);
 }
 
@@ -91,11 +87,16 @@ void light(String n){
   
   int i = 0;
   
+<<<<<<< HEAD
   if(n.length() == 1)
     lightNumber(n - '0');
+=======
+  if(n.length() == 0)
+    return;
+>>>>>>> origin/master
   
   if(n.length() < 3)
-    return;
+    lightNumber(n[0] - '0');
     
   while(i < (n.length()/3))
   {

@@ -81,7 +81,8 @@ setInterval(function()
 {
   if(canWrite)
   {
-  	var snakeCopy = snake.slice(0);
+  	serialPort.write(lifes);
+  	/*var snakeCopy = snake.slice(0);
 
   	if(hasPoint)
   	{
@@ -149,7 +150,7 @@ setInterval(function()
 	{
 			serialPort.write(total);
 			console.log("sending : %s", total);
-	}
+	}*/
   }
 }, 3000);
 
