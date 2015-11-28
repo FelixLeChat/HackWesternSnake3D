@@ -146,7 +146,7 @@ setInterval(function()
 		lifes --;
 		serialPort.write("" + lifes);
 		snake = [];
-		snake = defaultSnake;
+		//snake = defaultSnake;
 		console.log("lifes left : %s", lifes);
 		console.log(snake);
 
