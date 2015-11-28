@@ -42,21 +42,11 @@ wsConnected.on('connect', function() {
 
 
 // Update snake head
+var total = "";
 setInterval(function()
 {
   if(canWrite)
   {
-  	var total = "";
-  	snake.forEach(function(entry) {
-    	total +=  "" + entry.x + entry.y + entry.z;
-	});
-
-  	// Add point to achieve
-	total += "" + point.x + point.y + point.z;
-
-	serialPort.write(total);
-	console.log("sending : %s", total);
-
 	snake.forEach(function(entry) {
     	
     	entry.x += direction.x;
@@ -70,5 +60,16 @@ setInterval(function()
     	if(entry.z > 4)
     		entry.z = 0;
 	});
+
+	total = "";
+  	snake.forEach(function(entry) {
+    	total +=  "" + entry.x + entry.y + entry.z;
+	});
+
+  	// Add point to achieve
+	total += "" + point.x + point.y + point.z;
+
+	serialPort.write(total);
+	console.log("sending : %s", total);
   }
 }, 3000);
