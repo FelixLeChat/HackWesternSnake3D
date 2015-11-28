@@ -4,8 +4,11 @@ var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
 });
 
+var canWrite = false;
+
 serialPort.on("open", function () {
   console.log('open Serial Port');
+  canWrite = true;
 
   /*serialPort.on('data', function(data) {
     console.log('data received: ' + data);
@@ -31,9 +34,10 @@ wsConnected.on('connect', function() {
 		// when text is received from Websocket Server
 		console.log('received: %s', message);
 
-		serialPort.write(new Buffer('4','0,0,0'), function(err, results) {
-		    console.log('err ' + err);
-		    console.log('results ' + results);
-		});
+		if(canWrite)
+			serialPort.write("0,0,0", function(err, results) {
+		    	console.log('err ' + err);
+		    	console.log('results ' + results);
+			});
 	});
 });
