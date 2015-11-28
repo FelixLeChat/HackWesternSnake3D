@@ -31,7 +31,7 @@ var server = ws.createServer(function (conn)
     {
     });
 
-}).listen(8081);
+}).listen(5000, "websocket-nodejs.herokuapp.com");
 
 function broadcast(str) {
 	server.connections.forEach(function (connection) {
