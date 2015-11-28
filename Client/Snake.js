@@ -111,10 +111,18 @@ setInterval(function()
 
 		if(part.x > 4)
 			part.x = 0;
+		else if(part.x <0)
+			part.x = 4;
+
 		if(part.y > 4)
 			part.y = 0;
+		else if(part.y <0)
+			part.y = 4;
+
 		if(part.z > 4)
 			part.z = 0;
+		else if(part.z <0)
+			part.z = 4;
 	});
 
   	total = "";
