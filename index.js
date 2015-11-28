@@ -23,8 +23,11 @@ wss.on("connection", function(ws) {
 
 	ws.on('message', function incoming(message) {
 	    console.log('received: %s', message);
-	    broadcast(message);
+
+	    wss.clients.forEach(function each(client) {
+	    client.send(message);
 	  });
+	});
 
   ws.on("close", function() {
     console.log("websocket connection close")
@@ -33,8 +36,8 @@ wss.on("connection", function(ws) {
 
 })
 
-wss.broadcast = function broadcast(data) {
+/*wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
     client.send(data);
   });
-};
+};*/
