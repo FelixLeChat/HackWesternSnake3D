@@ -14,32 +14,53 @@ console.log("http server listening on %d", port)
 var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
+
+var results = {up:0, down:0, left:0, right:0, forward:0, backward:0};
+
 wss.on('connection', function connection(ws) {
 
   ws.on('message', function incoming(message) 
   {
-    console.log('received: %s', message);
-    wss.clients.forEach(function each(client) {
-	    client.send(message);
-	  });
+      var received = true;
+      message = message.toLowerCase();
+
+      switch(message)
+      {
+        case "up":
+            results.up++;
+            break;
+        case "down":
+            results.down++;
+            break;
+        case "left":
+            results.left++;
+            break;
+        case "right":
+            results.right++;
+            break;
+        case "forward":
+            results.forward++;
+            break;
+        case "backward":
+            results.backward++;
+            break;
+        default:
+            received = false;
+            break;
+      }
+
+      if(received)
+        ws.send("vote compiled");
   });
 
-  ws.send('Connected :D');
+    ws.send('Connected to voting channel');
+    ws.send("Choices : up, down, left, right, forward, backward");
+
 });
 
-/*ws.on('open', function open() {
-  console.log('connected');
-  ws.send(Date.now().toString(), {mask: true});
-});
-
-ws.on('close', function close() {
-  console.log('disconnected');
-});
-
-ws.on('message', function message(data, flags) {
-  console.log('Roundtrip time: ' + (Date.now() - parseInt(data)) + 'ms', flags);
-
-  setTimeout(function timeout() {
-    ws.send(Date.now().toString(), {mask: true});
-  }, 500);
-});*/
+setInterval(function()
+{
+    wss.clients.forEach(function each(client) {
+        client.send("Total : Up - %s, Down %s", results.up, results.down);
+    });
+}, 10000);
