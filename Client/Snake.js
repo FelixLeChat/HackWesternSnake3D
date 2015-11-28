@@ -47,17 +47,19 @@ setInterval(function(){
   
   if(canWrite){
 
+  	var nextSnake = snake.slice(0);
+
   	console.log(snake);
 
   	total = "";
 
-  	for(i=snake.length-1;i>0;i--){
-  		snake[i-1] = snake[i];
+  	for(i=1;i<=snake.lentgh;i++){
+  		nextSnake[i] = snake[i-1];
   	}
 
-  	snake[0].x += direction.x;
-  	snake[0].y += direction.y;
-  	snake[0].z += direction.z;
+  	nextSnake[0].x = snake[0].x + direction.x;
+  	nextSnake[0].y = snake[0].y + direction.y;
+  	nextSnake[0].z = snake[0].z + direction.z;
 
   	snake.forEach(function(part){
   		total+= "" + part.x + part.y + part.z;
