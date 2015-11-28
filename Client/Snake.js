@@ -49,7 +49,7 @@ setInterval(function(){
 
   	var nextSnake = snake.slice(0);
 
-  	console.log(snake);
+  	console.log(nextSnake);
 
   	total = "";
 
@@ -57,9 +57,9 @@ setInterval(function(){
   		nextSnake[i-1] = snake[i];
   	}
 
-  	nextSnake[0].x = snake[0].x + direction.x;
-  	nextSnake[0].y = snake[0].y + direction.y;
-  	nextSnake[0].z = snake[0].z + direction.z;
+  	nextSnake[0].x = nextSnake[0].x + direction.x;
+  	nextSnake[0].y = nextSnake[0].y + direction.y;
+  	nextSnake[0].z = nextSnake[0].z + direction.z;
 
   	snake.forEach(function(part){
   		total+= "" + part.x + part.y + part.z;
