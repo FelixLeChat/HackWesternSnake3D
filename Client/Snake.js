@@ -7,13 +7,13 @@ var serialPort = new SerialPort("/dev/ttyACM0", {
 
 var canWrite = false;
 
-PythonShell.run('/Myo4Linux/sample/print_pose_lister.py', function (err) {
+PythonShell.run('/Myo4Linux/lib/device_lister.py', function (err) {
   if (err) throw err;
-  console.log('finished');
+  console.log('device listener ready');
 });
 PythonShell.run('/Myo4Linux/sample/test_myo.py', function (err) {
   if (err) throw err;
-  console.log('finished');
+  console.log('myo running');
 });
 
 serialPort.on("open", function () {
