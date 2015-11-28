@@ -52,4 +52,4 @@ setInterval(function()
 	serialPort.write(total);
 	console.log("sending : %s", total);
   }
-}, 1000);
+}, 5000);

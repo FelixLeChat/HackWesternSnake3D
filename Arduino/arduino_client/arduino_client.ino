@@ -81,14 +81,18 @@ void loop()
 { 
   if (Serial.available()) 
   {
-    resetAllUpState();
     light(Serial.readString());
   }
   lightCube();
 }
 
-void light(String n){  
+void light(String n){
+ 
+  resetAllUpState(); 
   int i = 0;
+  
+  if(n.length() == 1 && (n[0] >= '0' && n[0] <= '9'))
+    lightNumber(n[0] - '0');
   
   if(n.length() < 3)
     return;
