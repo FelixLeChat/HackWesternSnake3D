@@ -143,7 +143,7 @@ setInterval(function()
 	if(IsHittingItself())
 	{
 		lifes --;
-		serialPort.write(lifes);
+		serialPort.write("" + lifes);
 		snake = [];
 		snake = defaultSnake;
 		console.log("lifes left : %s", lifes);
