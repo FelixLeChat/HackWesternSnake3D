@@ -1,10 +1,20 @@
 var SerialPort = require("serialport").SerialPort;
+var PythonShell = require('python-shell');
 
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
 });
 
 var canWrite = false;
+
+PythonShell.run('/Myo4Linux/sample/print_pose_lister.py', function (err) {
+  if (err) throw err;
+  console.log('finished');
+});
+PythonShell.run('/Myo4Linux/sample/test_myo.py', function (err) {
+  if (err) throw err;
+  console.log('finished');
+});
 
 serialPort.on("open", function () {
   console.log('open Serial Port');
@@ -61,7 +71,7 @@ setInterval(function()
 
   	// check for overflow
 	snake.forEach(function(part) {
-		
+
 		if(part.x > 4)
 			part.x = 0;
 		if(part.y > 4)
