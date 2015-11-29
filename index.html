@@ -77,8 +77,7 @@
 					updateStatus.innerHTML = "Vote successful!";
 					updateStatus.className = 'open';
 					setTimeout(function() {
-					    updateStatus.innerHTML = 'Waiting for input...';
-					    updateStatus.className = 'normal';
+					    updateStatus.innerHTML = '&nbsp';
 					}, 2000); 
 					// Send the message through the WebSocket.
 					socket.send(message);
