@@ -23,12 +23,12 @@
             var ws = new WebSocket(host);
             ws.onmessage = function (event) {
                 var data = JSON.parse(event.data);
-                $("#up").htlm(data.up);
-                $("#down").html(data.down);
-                $("#left").html(data.left);
-                $("#right").html(data.right);
-                $("#forward").html(data.forward);
-                $("#backward").html(data.backward);
+                $("#up").text(data.up);
+                $("#down").text(data.down);
+                $("#left").text(data.left);
+                $("#right").text(data.right);
+                $("#forward").text(data.forward);
+                $("#backward").text(data.backward);
             };
         </script>
     </head>
