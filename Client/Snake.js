@@ -11,7 +11,7 @@ server.listen(1337, '127.0.0.1', function(data){
 });
 
 
-socket.on('data', function(data){
+server.on('data', function(data){
   console.log(data)
 });
 
