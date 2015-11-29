@@ -1,5 +1,6 @@
 <html>
     <head>
+    <script src="script/jquery-1.11.3.min.js"></script>
         <style>
             body {
                 font-family: "Helvetica Neue", helvetica, arial;
@@ -21,16 +22,17 @@
             var host = location.origin.replace(/^http/, 'ws')
             var ws = new WebSocket(host);
             ws.onmessage = function (event) {
-                var li = document.createElement('li');
-                data = JSON.parse(event.data);
-                document.querySelector('#votes').appendChild(li);
-                document.querySelector('#up').innerHTML = data.up;
+                var data = JSON.parse(event.data);
+                $("#up").htlm(data.up);
             };
         </script>
     </head>
     <body>
         <p id="up"></p>
         <h1>Snake</h1>
-        <ul id='votes'></ul>
+        <ul id='votes'>
+            <li id="up"></li>
+            <li id="down"></li>
+        </ul>
     </body>
 </html>
