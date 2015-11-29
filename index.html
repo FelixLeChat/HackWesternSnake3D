@@ -24,12 +24,12 @@
             ws.onmessage = function (event) {
                 var data = JSON.parse(event.data);
                 $("#up").htlm(data.up);
+                $("#down").html(data.down);
             };
         </script>
     </head>
     <body>
-        <p id="up"></p>
-        <h1>Snake</h1>
+    <h1>Snake</h1>        
         <ul id='votes'>
             <li id="up"></li>
             <li id="down"></li>
