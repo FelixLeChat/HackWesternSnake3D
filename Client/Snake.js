@@ -4,9 +4,17 @@ var net = require('net');
 var server = net.createServer(function(socket){
     socket.write('Echo server\r\n');
     socket.pipe(socket);
+    socket.on('data', function(data){
+      console.log(data)
+    });
+
 })
 
-console.log(server.listen(1337, '127.0.0.1'));
+server.listen(1337, '127.0.0.1', function(data){
+  console.log(data)
+});
+
+
 
 
 /*

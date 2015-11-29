@@ -20,9 +20,6 @@ wss.on('connection', function connection(ws) {
 
   ws.on('message', function incoming(message) 
   { 
-    var received = true;
-    message = message.toLowerCase();
-
     switch(message)
     {
       case "up":
@@ -44,22 +41,14 @@ wss.on('connection', function connection(ws) {
         results.backward++;
         break;
       default:
-        received = false;
         break;
     }
 
-    if(received)
+    wss.clients.forEach(function each(client) 
     {
-        ws.send("Vote successful!");
-        wss.clients.forEach(function each(client) 
-        {
-            client.send("Received vote for " + message);
-        });
-    }
-    else 
-    {
-        ws.send("Vote refused: " + message + " is an invalid choice.");
-    }
+      message = message.toUpperCase();
+      client.send("registered a vote for " + message);
+    });
   });
 
 });
