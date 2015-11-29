@@ -189,6 +189,6 @@ function isHittingItself()
 }
 
 pyshell.end(function(err){
-	if(err) throw err;
+	//if(err) throw err;
 	console.log("finished Python script");
 });
