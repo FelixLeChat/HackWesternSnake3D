@@ -23,10 +23,12 @@ var wsConnected = ws.connect("ws://websocket-nodejs.herokuapp.com", function(wss
 wsConnected.on('connect', function() {
 	console.log('Connection established');
 
-	wsConnected.on('text', function incoming(data) {
+	wsConnected.on('text', function incoming(event) {
 
 
-		console.log('received: %s', JSON.parse(data).message);
+		var data = JSON.parse(event.data);
+		
+		console.log('received: %s', data.message);
 
 		// Hack pour Max
 		var result = JSON.parse(data).message.split(":");
