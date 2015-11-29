@@ -14,16 +14,9 @@ console.log("http server listening on %d", port)
 var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
-// Get references to elements on the page.
-var form = document.getElementById('message-form');
-var messageField = document.getElementById('message');
-var messagesList = document.getElementById('messages');
-var socketStatus = document.getElementById('status');
-var closeBtn = document.getElementById('close');
-
 
 wss.on('connection', function connection(ws) {
-	
+
 	ws.on('message', function incoming(message) 
 	{
 
