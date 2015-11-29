@@ -74,11 +74,13 @@
 
 				if(received)
 				{
-					updateStatus.value = "Vote successful!";
+					updateStatus.innerHTML = "Vote successful!";
+					updateStatus.className = 'open';
 					// Send the message through the WebSocket.
 					socket.send(message);
 				} else {
-					updateStatus.value = "Vote invalid: " + message + " is an invalid choice.";
+					updateStatus.innerHTML = "Vote invalid: " + message + " is an invalid choice.";
+					updateStatus.className = 'closed';
 				}
 				
 				// Clear out the message field.
