@@ -48,10 +48,10 @@
 				var data = JSON.parse(event.data);
 
 				// iteratively update list
-				ml5.innerHTML = ml4.value;
-				ml4.innerHTML = ml3.value;
-				ml3.innerHTML = ml2.value;
-				ml2.innerHTML = ml1.value;
+				ml5.innerHTML = ml4.innerHTML;
+				ml4.innerHTML = ml3.innerHTML;
+				ml3.innerHTML = ml2.innerHTML;
+				ml2.innerHTML = ml1.innerHTML;
 				ml1.innerHTML = data.message;
 			
 				upResult.innerHTML = data.up;
