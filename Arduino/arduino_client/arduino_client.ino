@@ -87,17 +87,6 @@ void light(String n){
   
   int i = 0;
   
-<<<<<<< HEAD
-  if(n.length() == 1)
-    lightNumber(n - '0');
-<<<<<<< HEAD
-=======
-  if(n.length() == 0)
-    return;
->>>>>>> origin/master
-=======
->>>>>>> parent of cd3b695... add life
-  
   if(n.length() < 3)
     lightNumber(n[0] - '0');
     

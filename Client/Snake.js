@@ -6,7 +6,51 @@ var server = net.createServer(function(socket){
     socket.write('Echo server\r\n');
     socket.pipe(socket);
     socket.on('data', function(data){
-      console.log(data)
+    	switch(data)
+		{
+			case "up":
+				if(direction.z != -1)
+				{
+					direction = {x:0,y:0,z:1};
+					Update();
+				}
+				break;
+			case "down":
+				if(direction.z != 1)
+				{
+					direction = {x:0,y:0,z:-1};
+					Update();
+				}
+				break;
+			case "left":
+				if(direction.y != 1)
+				{
+					direction = {x:0,y:-1,z:0};
+					Update();
+				}
+				break;
+			case "right":
+				if(direction.y != -1)
+				{
+					direction = {x:0,y:1,z:0};
+					Update();
+				}
+				break;
+			case "forward":
+				if(direction.x != 1)
+				{
+					direction = {x:1,y:0,z:0};
+					Update();
+				}
+				break;
+			case "backward":
+				if(direction.x != -1)
+				{
+					direction = {x:1,y:0,z:0};
+					Update();
+				}
+				break;
+		};
     });
 
 })
@@ -15,45 +59,6 @@ server.listen(1337, '127.0.0.1', function(data){
   console.log(data)
 });
 
-
-
-
-/*
-var spawn = require('child_process').spawn;
-var PythonShell = require('python-shell');
-describe('PythonShell', function () {
-  PythonShell.defaultOptions = {
-    scriptPath: './Myo4Linux/sample/test_myo.py'
-  };
-
-      describe('#ctor(script, options)', funcion(){
-        it('should spawn process', function (done) {
-            var pyshell = new PythonShell('/Myo4Linux/sample/test_myo.py');
-            pyshell.command.should.eql(['test/python/exit-code.py']);
-            pyshell.terminated.should.be.false;
-            pyshell.end(function (err) {
-                 if (err) return done(err);
-                 pyshell.terminated.should.be.true;
-                 done();
-      });
-  });
-});
-*/
-
-//var ls = spawn('python',['/Myo4Linux/sample/test_myo.py']);
-
-/*
-ls.stdout.on('data', function (data) {
-console.log('stdout: ' + data);
-});
-
-ls.stderr.on('data', function (data) {
-console.log('stderr: ' + data);
-});
-
-var PythonShell = require('python-shell');
-var pyshell = new PythonShell('Myo4Linux/lib/device_listener.py');
->>>>>>> origin/master
 
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
@@ -67,51 +72,6 @@ serialPort.on("open", function () {
   canWrite = true;
 });
 
-/*
-var ws = require("nodejs-websocket");
-var wsConnected = ws.connect("ws://websocket-nodejs.herokuapp.com", function(wss)
-{
-	//console.log("connect to websocket");
-});
-
-wsConnected.on('connect', function() {
-	//console.log('Connection established');
-
-	wsConnected.on('text', function incoming(message) {
-
-
-		//console.log('received: %s', message);
-
-		switch(message)
-		{
-			case "up":
-				direction = {x:0,y:0,z:1};
-				break;
-			case "down":
-				direction = {x:0,y:1,z:-1};
-				break;
-			case "left":
-				direction = {x:0,y:-1,z:0};
-				break;
-			case "right":
-				direction = {x:0,y:1,z:0};
-				break;
-			case "forward":
-				direction = {x:1,y:0,z:0};
-				break;
-			case "backward":
-				direction = {x:-1,y:0,z:0};
-				break;
-		};
-
-		// Forward to arduino
-		/*if(canWrite)
-			serialPort.write(message, function(err, results) {
-		    	console.log('err ' + err);
-		    	console.log('results ' + results);
-			});
-	});
-});
 
 
 // the snake is a array of position (head at 0)
@@ -126,7 +86,7 @@ var lifes = 9;
 
 // Update snake head
 var total = "";
-setInterval(function()
+function Update()
 {
   if(canWrite && lifes >= 0)
   {
@@ -155,7 +115,7 @@ setInterval(function()
   	if(snake[0].x == point.x && snake[0].y == point.y && snake[0].z == point.z)
   	{
   		hasPoint = true;
-  		//point = {x:Math.floor(Math.random() * 4),y:Math.floor(Math.random() * 4),z:Math.floor(Math.random() * 4)};
+  		point = {x:Math.floor(Math.random() * 4),y:Math.floor(Math.random() * 4),z:Math.floor(Math.random() * 4)};
   	}
 
   	// check for overflow
@@ -185,8 +145,6 @@ setInterval(function()
   	// Add point to achieve
 	total += "" + point.x + point.y + point.z;
 
-
-
 	end = snakeCopy[snakeCopy.length-1];
 
 	if(isHittingItself())
@@ -194,8 +152,8 @@ setInterval(function()
 		console.log(snake);
 		lifes --;
 		serialPort.write("" + lifes);
+		// reset snake
 		snake = [];
-		//snake = defaultSnake;
 		console.log("lifes left : %s", lifes);
 		console.log(snake);
 
@@ -205,11 +163,11 @@ setInterval(function()
 	}
 	else
 	{
-		///serialPort.write(total);
-		//console.log("sending : %s", total);
+		serialPort.write(total);
+		console.log("sending : %s", total);
 	}
   }
-}, 3000);
+}
 
 
 function isHittingItself()
@@ -220,9 +178,4 @@ function isHittingItself()
 	return false;
 }
 
-/*
-pyshell.end(function(err){
-	//if(err) throw err;
-	console.log("finished Python script");
-});
-*/
+Update();

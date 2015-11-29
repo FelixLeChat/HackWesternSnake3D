@@ -327,11 +327,11 @@ void nextRandomPoint()
     goal[2] = random(0,5);
     
     // Test if looping here
-    if((millis() - time) > 1000)
+    /*if((millis() - time) > 1000)
     {
       goal[0]=4;goal[1]=4;goal[2]=4;
       return;
-    }
+    }*/
   }
 }
 
