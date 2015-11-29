@@ -54,20 +54,21 @@ boolean UpState[5][5][5] ={
   {false, false, false, false, false} } 
 };
 
-int snake[10][3] ={
-{0,1,0},
-{0,0,0},
-{0,0,0},
-{0,0,0},
-{0,0,0},
-{0,0,0},
-{0,0,0},
-{0,0,0},
-{0,0,0},
-{0,0,0}};
+int snake[20][3] ={
+{0,1,0},{0,0,0},
+{0,0,0},{0,0,0},
+{0,0,0},{0,0,0},
+{0,0,0},{0,0,0},
+{0,0,0},{0,0,0},
+{0,0,0},{0,0,0},
+{0,0,0},{0,0,0},
+{0,0,0},{0,0,0},
+{0,0,0},{0,0,0},
+{0,0,0},{0,0,0}};
 int snakelength = 2;
+int maxlength = 18;
 int goal[3] = {0,0,0};
-long TEMPS = millis();
+unsigned long TEMPS = millis();
 
 //-------------------------------------------------------------------------------------------//
 void setup() {
@@ -84,8 +85,9 @@ void setup() {
   pinMode(Etage3, OUTPUT);
   pinMode(Etage4, OUTPUT);
   
-  randomSeed(analogRead(0));
+  randomSeed(211);
   
+  // setup next objective
   nextRandomPoint();
 }
 
@@ -94,6 +96,8 @@ void loop()
 { 
   resetAllUpState();
   insertSnake();
+  
+  // light goal
   UpState[goal[0]][goal[1]][goal[2]] = true;
   lightCube();
   
@@ -115,6 +119,8 @@ void insertSnake()
 
 boolean onTarget = false;
 int ending[3] = {0,0,0};
+int iterMissed = 0;
+
 void UpdatePosition(){
   
   int deltaX = goal[0] - snake[0][0];
@@ -124,9 +130,8 @@ void UpdatePosition(){
   int movingX = 0, movingY = 0, movingZ = 0;
   boolean mouvement = false;
   
-  // head cannot go over bounds in all directions
-  int point1[3] = {snake[0][0]+1, snake[0][1], snake[0][2]};
-  if(deltaX > 0 && !isPartOfSnake(point1))
+  int point[3] = {snake[0][0]+1, snake[0][1], snake[0][2]};
+  if(deltaX > 0 && !isPartOfSnake(point))
   {
     if(!mouvement)
     {
@@ -135,8 +140,8 @@ void UpdatePosition(){
     }
   }
   
-  int point2[3] = {snake[0][0]-1, snake[0][1], snake[0][2]};
-  if(deltaX < 0 && !isPartOfSnake(point2))
+  point[0] = snake[0][0]-1;
+  if(deltaX < 0 && !isPartOfSnake(point))
   {
     if(!mouvement)
     {
@@ -145,8 +150,9 @@ void UpdatePosition(){
     }
   }
   
-  int point3[3] = {snake[0][0], snake[0][1]+1, snake[0][2]};
-  if(deltaY > 0 && !isPartOfSnake(point3))
+  point[0]=snake[0][0];
+  point[1]=snake[0][1]+1;
+  if(deltaY > 0 && !isPartOfSnake(point))
   {
     if(!mouvement)
     {
@@ -155,8 +161,8 @@ void UpdatePosition(){
     }
   }
   
-  int point4[3] = {snake[0][0], snake[0][1]-1, snake[0][2]};
-  if(deltaY < 0 && !isPartOfSnake(point4))
+  point[1]=snake[0][1]-1;
+  if(deltaY < 0 && !isPartOfSnake(point))
   {
     if(!mouvement)
     {
@@ -165,8 +171,9 @@ void UpdatePosition(){
     }
   }
   
-  int point5[3] = {snake[0][0], snake[0][1], snake[0][2]+1};
-  if(deltaZ > 0 && !isPartOfSnake(point5))
+  point[1]=snake[0][1];
+  point[2]=snake[0][2]+1;
+  if(deltaZ > 0 && !isPartOfSnake(point))
   {
     if(!mouvement)
     {
@@ -175,8 +182,8 @@ void UpdatePosition(){
     }
   }
   
-  int point6[3] = {snake[0][0], snake[0][1], snake[0][2]-1};
-  if(deltaZ < 0 && !isPartOfSnake(point4))
+  point[2]=snake[0][2]-1;
+  if(deltaZ < 0 && !isPartOfSnake(point))
   {
     if(!mouvement)
     {
@@ -185,12 +192,74 @@ void UpdatePosition(){
     }
   }
   
+  // If no mouvement have been found, try to go somewhere near
+  if(!mouvement)
+  {
+    iterMissed++;
+    //check x move positif
+    point[0]=snake[0][0]+1;point[1]=snake[0][1];point[2]=snake[0][2];
+    if(snake[0][0] < 4 && !isPartOfSnake(point))
+    {
+      mouvement = true;
+      movingX = 1;
+    }
+    
+    //check x move negatif
+     point[0] = snake[0][0]-1;
+    if(snake[0][0] > 0 && !isPartOfSnake(point))
+    {
+      movingX = -1;
+      mouvement = true;
+    }
+  
+    //check y move positif
+    point[0]=snake[0][0];
+    point[1]=snake[0][1]+1;
+    if(snake[0][1] < 4 && !isPartOfSnake(point))
+    {
+      movingY = 1;
+      mouvement = true;
+    }
+  
+    //check y move negatif
+    point[1]=snake[0][1]-1;
+    if(snake[0][1] > 0 && !isPartOfSnake(point))
+    {
+      movingY = -1;
+      mouvement = true;
+    }
+  
+    //check z positif
+    point[1]=snake[0][1];
+    point[2]=snake[0][2]+1;
+    if(snake[0][2] < 4 && !isPartOfSnake(point))
+    {
+      movingZ = 1;
+      mouvement = true;
+    }
+  
+    //check z negatif
+    point[2]=snake[0][2]-1;
+    if(snake[0][2] > 0 && !isPartOfSnake(point))
+    {
+      movingZ = -1;
+      mouvement = true;
+    }
+    
+    if(iterMissed > 10)
+    {
+      mouvement = false;
+      iterMissed=0;
+    }
+      
+  }
+  
   // bring forward the snake
   if(mouvement)
   {
     if(onTarget)
     {
-      if(snakelength < 9)
+      if(snakelength < maxlength)
         snakelength++;
       onTarget = false;
     }
@@ -207,20 +276,19 @@ void UpdatePosition(){
     snake[0][1] += movingY;
     snake[0][2] += movingZ;
     
-    if(snake[0][0] == goal[0] && snake[0][1] == goal[1] && snake[0][2] == goal[2])
-    {
-      onTarget = true;
-      goal[0] = random(0,5);
-      goal[1] = random(0,5);
-      goal[2] = random(0,5);
-    }
-    
     ending[0] = snake[snakelength-1][0];
     ending[1] = snake[snakelength-1][1];
     ending[2] = snake[snakelength-1][2];
+    
+    if(snake[0][0] == goal[0] && snake[0][1] == goal[1] && snake[0][2] == goal[2])
+    {
+      onTarget = true;
+      nextRandomPoint();
+    }
   }
   else
   {
+    // Reset Snake to his default place
     snake[0][0]=0;
     snake[0][1]=1;
     snake[0][2]=0;
@@ -229,6 +297,13 @@ void UpdatePosition(){
     snake[1][1]=0;
     snake[1][2]=0;
     snakelength = 2;
+    
+    onTarget = false;
+    ending[0]=0;
+    ending[1]=0;
+    ending[2]=0;
+    
+    nextRandomPoint();
   }
 }
 
@@ -244,11 +319,19 @@ boolean isPartOfSnake(int point[3])
 
 void nextRandomPoint()
 {
-  while(isPartOfSnake(goal)
+  unsigned int time = millis();
+  while(isPartOfSnake(goal))
   {
     goal[0] = random(0,5);
     goal[1] = random(0,5);
     goal[2] = random(0,5);
+    
+    // Test if looping here
+    if((millis() - time) > 1000)
+    {
+      goal[0]=4;goal[1]=4;goal[2]=4;
+      return;
+    }
   }
 }
 
