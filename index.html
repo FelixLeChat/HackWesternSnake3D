@@ -24,12 +24,12 @@
             var ws = new WebSocket(host);
             ws.onmessage = function (event) {
                 var data = JSON.parse(event.data);
-                $("#up").htlm(data.up);
-                $("#down").html(data.down);
-                $("#left").html(data.left);
-                $("#right").html(data.right);
-                $("#forward").html(data.forward);
-                $("#backwards").html(data.backwards);
+                $(".up").htlm(data.up);
+                $(".down").html(data.down);
+                $(".left").html(data.left);
+                $(".right").html(data.right);
+                $(".forward").html(data.forward);
+                $(".backwards").html(data.backwards);
             };
         </script>
     </head>
@@ -45,12 +45,12 @@
                     <td>Backward</td>
               </tr>
               <tr>
-                    <td id="up"></td>
-                    <td id="down"></td>
-                    <td id="left"></td>
-                    <td id="right"></td>
-                    <td id="forward"></td>
-                    <td id="backwards"></td>
+                    <td><span class="up"></span></td>
+                    <td><span class="down"></span></td>
+                    <td><span class="left"></span></td>
+                    <td><span class="right"></span></td>
+                    <td><span class="forward"></span></td>
+                    <td><span class="backwards"></span></td>
               </tr>
         </table>  
     </body>
