@@ -46,7 +46,8 @@ wss.on('connection', function connection(ws) {
 
     wss.clients.forEach(function each(client) 
     {
-        client.send("vote for " + message.toUpper());
+      message = message.toUpperCase();
+      client.send("vote for " + message);
     });
   });
 
