@@ -32,7 +32,17 @@
 			// Handle messages sent by the server.
 			socket.onmessage = function(event) {
 				var message = event.data;
-				messagesList.innerHTML += '<li class="received"><span>Received:</span>' + message + '</li>';
+				if(message.indexOf("registered") > -1) {
+					messagesList.innerHTML += '<li class="received"><span>Received:</span>' + message + '</li>';
+				} else {
+					var data = JSON.parse(event.data);
+					$("#up").text(data.up);
+					$("#down").text(data.down);
+					$("#left").text(data.left);
+					$("#right").text(data.right);
+					$("#forward").text(data.forward);
+					$("#backward").text(data.backward);
+				}
 			};
 
 
@@ -118,7 +128,8 @@
 		<button type="submit">Vote</button>
 		<button type="button" id="close">Close Connection</button>
 	</form>
-
+</div>
+<div id="page-wrapper">
 	<table cellspacing='0'> 
 	<thead>
 		<tr>
@@ -133,12 +144,12 @@
 
 	<tbody>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td id='up'></td>
+			<td id='down'></td> 
+			<td id='left'></td>
+			<td id='right'></td>
+			<td id='forward'></td> 
+			<td id='backward'></td>
 		</tr>
 
 	</tbody>

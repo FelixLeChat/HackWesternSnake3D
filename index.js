@@ -53,14 +53,14 @@ wss.on('connection', function connection(ws) {
 
 });
 
-// // update score values every .5 seconds
-// setInterval(function()
-// {
-//     wss.clients.forEach(function each(client) 
-//     {
-//         client.send(JSON.stringify(results));
-//     });
-// }, 500);
+// update score values every .5 seconds
+setInterval(function()
+{
+    wss.clients.forEach(function each(client) 
+    {
+        client.send(JSON.stringify(results));
+    });
+}, 500);
 
 // // select next move every 10 seconds and reset scores
 // setInterval(function()
