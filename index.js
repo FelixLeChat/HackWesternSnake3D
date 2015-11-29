@@ -48,18 +48,18 @@ wss.on('connection', function connection(ws) {
         break;
     }
 
-      if(received)
+    if(received)
+    {
+        ws.send("Vote successful!");
+        wss.clients.forEach(function each(client) 
         {
-            ws.send("Vote successful!");
-            wss.clients.forEach(function each(client) 
-            {
-                client.send("Received vote for " + message);
-            });
-        }
-        else 
-        {
-            ws.send("Vote refused: " + message + " is invalid");
-        }
+            client.send("Received vote for " + message);
+        });
+    }
+    else 
+    {
+        ws.send("Vote refused: " + message + " is an invalid choice.");
+    }
   });
 
 });
