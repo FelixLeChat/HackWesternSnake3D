@@ -161,7 +161,7 @@ function Update()
 	{
 		console.log(snake);
 		lifes --;
-		serialPort.write("" + lifes + "-");
+		//serialPort.write("" +lifes);
 		// reset snake
 		snake = [];
 		console.log("lifes left : %s", lifes);
