@@ -67,7 +67,7 @@ setInterval(function()
 function getWinner()
 {
   var max = 0;
-  var value = "No votes registered.";
+  var value = "No votes registered this round.";
 
   if(results.up > max)
   {
