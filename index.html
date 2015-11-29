@@ -1,7 +1,6 @@
 <html>
     <head>
         <script src="script/jquery-1.11.3.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <style>
             body {
                 font-family: "Helvetica Neue", helvetica, arial;
@@ -24,34 +23,24 @@
             var ws = new WebSocket(host);
             ws.onmessage = function (event) {
                 var data = JSON.parse(event.data);
-                $(".up").htlm(data.up);
-                $(".down").html(data.down);
-                $(".left").html(data.left);
-                $(".right").html(data.right);
-                $(".forward").html(data.forward);
-                $(".backward").html(data.backward);
+                $("#up").text(data.up);
+                $("#down").text(data.down);
+                $("#left").text(data.left);
+                $("#right").text(data.right);
+                $("#forward").text(data.forward);
+                $("#backward").text(data.backward);
             };
         </script>
     </head>
     <body>
-        <h1>Snake</h1>     
-        <table style="width:100%">
-              <tr>
-                    <td>Up</td>
-                    <td>Down</td>      
-                    <td>Left</td>
-                    <td>Right</td>
-                    <td>Forward</td>      
-                    <td>Backward</td>
-              </tr>
-              <tr>
-                    <td><span class="up"></span></td>
-                    <td><span class="down"></span></td>
-                    <td><span class="left"></span></td>
-                    <td><span class="right"></span></td>
-                    <td><span class="forward"></span></td>
-                    <td><span class="backwards"></span></td>
-              </tr>
-        </table>  
+        <h1>Snake</h1>        
+        <ul id='votes'>
+            <li id="up"></li>
+            <li id="down"></li>
+            <li id="left"></li>
+            <li id="right"></li>
+            <li id="forward"></li>
+            <li id="backward"></li>
+        </ul>
     </body>
 </html>

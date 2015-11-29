@@ -1,4 +1,15 @@
 var SerialPort = require("serialport").SerialPort;
+var net = require('net');
+
+var server = net.createServer(function(socket){
+    socket.write('Echo server\r\n');
+    socket.pipe(socket);
+})
+
+console.log(server.listen(1337, '127.0.0.1'));
+
+
+/*
 var spawn = require('child_process').spawn;
 var PythonShell = require('python-shell');
 describe('PythonShell', function () {
@@ -18,6 +29,7 @@ describe('PythonShell', function () {
       });
   });
 });
+*/
 
 //var ls = spawn('python',['/Myo4Linux/sample/test_myo.py']);
 
