@@ -30,22 +30,46 @@ wsConnected.on('connect', function() {
 		switch(message)
 		{
 			case "up":
-				direction = {x:0,y:0,z:1};
+				if(direction.z != -1)
+				{
+					direction = {x:0,y:0,z:1};
+					Update();
+				}
 				break;
 			case "down":
-				direction = {x:0,y:1,z:-1};
+				if(direction.z != 1)
+				{
+					direction = {x:0,y:0,z:-1};
+					Update();
+				}
 				break;
 			case "left":
-				direction = {x:0,y:-1,z:0};
+				if(direction.y != 1)
+				{
+					direction = {x:0,y:-1,z:0};
+					Update();
+				}
 				break;
 			case "right":
-				direction = {x:0,y:1,z:0};
+				if(direction.y != -1)
+				{
+					direction = {x:0,y:1,z:0};
+					Update();
+				}
 				break;
 			case "forward":
-				direction = {x:1,y:0,z:0};
+				if(direction.x != -1)
+				{
+					direction = {x:1,y:0,z:0};
+					Update();
+				}
 				break;
 			case "backward":
-				direction = {x:-1,y:0,z:0};
+				if(direction.x != 1)
+				{
+					direction = {x:-1,y:0,z:0};
+					Update();
+				}
 				break;
 		};
 	});
@@ -64,7 +88,7 @@ var lifes = 9;
 
 // Update snake head
 var total = "";
-setInterval(function()
+function Update()
 {
   if(canWrite && lifes >= 0)
   {
@@ -93,7 +117,7 @@ setInterval(function()
   	if(snake[0].x == point.x && snake[0].y == point.y && snake[0].z == point.z)
   	{
   		hasPoint = true;
-  		//point = {x:Math.floor(Math.random() * 4),y:Math.floor(Math.random() * 4),z:Math.floor(Math.random() * 4)};
+  		point = {x:Math.floor(Math.random() * 4),y:Math.floor(Math.random() * 4),z:Math.floor(Math.random() * 4)};
   	}
 
   	// check for overflow
@@ -123,8 +147,6 @@ setInterval(function()
   	// Add point to achieve
 	total += "" + point.x + point.y + point.z;
 
-
-
 	end = snakeCopy[snakeCopy.length-1];
 
 	if(isHittingItself())
@@ -132,8 +154,8 @@ setInterval(function()
 		console.log(snake);
 		lifes --;
 		serialPort.write("" + lifes);
+		// reset snake
 		snake = [];
-		//snake = defaultSnake;
 		console.log("lifes left : %s", lifes);
 		console.log(snake);
 
@@ -147,7 +169,7 @@ setInterval(function()
 		console.log("sending : %s", total);
 	}
   }
-}, 3000);
+}
 
 
 function isHittingItself()

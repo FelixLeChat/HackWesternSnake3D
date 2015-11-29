@@ -53,7 +53,7 @@ wss.on('connection', function connection(ws) {
         {
             ws.send("vote compiled");
             wss.clients.forEach(function each(client) {
-                client.send(message);
+                client.send("Vote for : " + message);
             });
         }
         else
@@ -70,6 +70,7 @@ setInterval(function()
 {
     wss.clients.forEach(function each(client) {
         client.send(JSON.stringify(results));
+        client.send(Winner());
     });
     resetVote();
 }, 10000);
@@ -82,3 +83,42 @@ function resetVote() {
     results.forward = 0;
     results.backward = 0;
 };
+
+function Winner(){
+
+    var max = 0;
+    var value = "";
+    
+    if(results.up > max)
+    {
+        value = "up";
+        max = value.up;
+    }
+    if(results.down > max)
+    {
+        value = "down";
+        max = value.down;
+    }
+    if(results.left > max)
+    {
+        value = "left";
+        max = value.left;
+    }
+    if(results.right > max)
+    {
+        value = "right";
+        max = value.right;
+    }
+    if(results.forward > max)
+    {
+        value = "forward";
+        max = value.forward;
+    }
+    if(results.backward > max)
+    {
+        value = "backward";
+        max = value.backward;
+    }
+
+    return value;
+}
