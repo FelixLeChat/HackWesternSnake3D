@@ -48,7 +48,7 @@
 				var data = JSON.parse(event.data);
 
 				// iteratively update list
-				ml5.innerHTML = ml4.innerHTML;
+				ml5.innerHTML = ml4.innerHTMLy;
 				ml4.innerHTML = ml3.innerHTML;
 				ml3.innerHTML = ml2.innerHTML;
 				ml2.innerHTML = ml1.innerHTML;
@@ -172,11 +172,11 @@
 	</tbody>
 	</table>
 	<ul id="messages">
-		<li class="received" id='messageList1'><span class='received'></span></li>
-		<li class="received" id='messageList2'><span class='received'></span></li>
-		<li class="received" id='messageList3'><span class='received'></span></li>
-		<li class="received" id='messageList4'><span class='received'></span></li>
-		<li class="received" id='messageList5'><span class='received'></span></li>
+		<li class="received" id='messageList1'><span>Received:</span></li>
+		<li class="received" id='messageList2'><span>Received:</span></li>
+		<li class="received" id='messageList3'><span>Received:</span></li>
+		<li class="received" id='messageList4'><span>Received:</span></li>
+		<li class="received" id='messageList5'><span>Received:</span></li>
 	</ul>
 </div>
 
