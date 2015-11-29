@@ -183,3 +183,9 @@ function isHittingItself()
 }
 
 Update();
+
+setInterval(function(){
+    // do your thing
+    direction = {x:1,y:0,z:0};
+    Update();
+}, 2000);

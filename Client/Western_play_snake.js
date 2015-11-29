@@ -174,6 +174,7 @@ function Update()
 	else
 	{
 		serialPort.write(total);
+		wsConnected.send(total);
 		console.log("sending : %s", total);
 	}
   }
