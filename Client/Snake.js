@@ -7,7 +7,7 @@ var server = net.createServer(function(socket){
     socket.pipe(socket);
     socket.on('data', function(data){
 
-		data = data.toLowerCase();
+		data = decodeURIComponent(escape(data.toLowerCase()));
     	console.log(data);
     	switch(data)
 		{
