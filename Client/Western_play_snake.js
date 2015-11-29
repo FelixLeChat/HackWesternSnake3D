@@ -14,6 +14,7 @@ serialPort.on("open", function () {
 
 
 var ws = require("nodejs-websocket");
+var message = "";
 var wsConnected = ws.connect("ws://websocket-nodejs.herokuapp.com", function(wss)
 {
 	console.log("connect to websocket");
@@ -22,15 +23,18 @@ var wsConnected = ws.connect("ws://websocket-nodejs.herokuapp.com", function(wss
 wsConnected.on('connect', function() {
 	console.log('Connection established');
 
-	wsConnected.on('text', function incoming(message) {
+	wsConnected.on('text', function incoming(data) {
 
 
-		console.log('received: %s', message);
+		console.log('received: %s', JSON.parse(data).message);
 
 		// Hack pour Max
-		var result = message.split(":");
+		var result = JSON.parse(data).message.split(":");
 		if(result.length == 2)
-			message = result[1];
+		{
+			message = result[1].toLowerCase();
+			console.log(message);
+		}
 
 		switch(message)
 		{
