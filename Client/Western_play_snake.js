@@ -27,6 +27,14 @@ wsConnected.on('connect', function() {
 
 		console.log('received: %s', message);
 
+		// Hack pour Max
+		var result = JSON.parse(message).message.split(":");
+		if(result.length == 2)
+		{
+			message = result[1].toLowerCase();
+			console.log(message);
+		}
+
 		switch(message)
 		{
 			case "up":
