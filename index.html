@@ -50,11 +50,7 @@
 
 				if(data.message.indexOf("WINNER:") > -1) {
 					var result = data.message.split(":");
-					if(result[1] != '') {
-						winner.innerHTML = result[1];
-					} else {
-						winner.innerHTML = "No votes registered."
-					}
+					winner.innerHTML = result[1];
 				} else {
 					// iteratively update list
 					ml5.innerHTML = ml4.innerHTML;
