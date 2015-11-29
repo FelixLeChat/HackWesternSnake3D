@@ -94,7 +94,7 @@ function getWinner()
       value = "forward";
       max = value.forward;
   }
-  if(results.backward > max)
+  if(results.backward > smax)
   {
       value = "backward";
       max = value.backward;
