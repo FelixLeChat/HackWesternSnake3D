@@ -1,46 +1,56 @@
 <html>
-    <head>
-        <script src="script/jquery-1.11.3.min.js"></script>
-        <style>
-            body {
-                font-family: "Helvetica Neue", helvetica, arial;
-                padding: 15px;
-            }
+	<head>
+		<script src="script/jquery-1.11.3.min.js"></script>
+		<style>
+			body {
+				font-family: "Helvetica Neue", helvetica, arial;
+				padding: 15px;
+			}
 
-            ul {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-            }
+			ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
 
-            ul li {
-                line-height: 1.4;
-            }
-        </style>
+			ul li {
+				line-height: 1.4;
+			}
+		</style>
 
-        <script>
-            var host = location.origin.replace(/^http/, 'ws')
-            var ws = new WebSocket(host);
-            ws.onmessage = function (event) {
-                var data = JSON.parse(event.data);
-                $("#up").text(data.up);
-                $("#down").text(data.down);
-                $("#left").text(data.left);
-                $("#right").text(data.right);
-                $("#forward").text(data.forward);
-                $("#backward").text(data.backward);
-            };
-        </script>
-    </head>
-    <body>
-        <h1>Snake</h1>        
-        <ul id='votes'>
-            <li id="up"></li>
-            <li id="down"></li>
-            <li id="left"></li>
-            <li id="right"></li>
-            <li id="forward"></li>
-            <li id="backward"></li>
-        </ul>
-    </body>
+		<script>
+			var host = location.origin.replace(/^http/, 'ws')
+			var ws = new WebSocket(host);
+			ws.onmessage = function (event) {
+				var data = JSON.parse(event.data);
+				$("#up").text(data.up);
+				$("#down").text(data.down);
+				$("#left").text(data.left);
+				$("#right").text(data.right);
+				$("#forward").text(data.forward);
+				$("#backward").text(data.backward);
+			};
+		</script>
+	</head>
+	<body>
+		<h1>Snake</h1>   
+		<table>
+			<tr>
+				<th>up</th>
+				<th>down</th> 
+				<th>left</th>
+				<th>right</th> 
+				<th>forward</th>
+				<th>backward</th> 
+			</tr>
+			<tr>
+				<td id='up'></td>
+				<td id='down'></td> 
+				<td id='left'></td>
+				<td id='right'></td>
+				<td id='forward'></td> 
+				<td id='backward'></td>
+			</tr>
+		</table>
+	</body>
 </html>
