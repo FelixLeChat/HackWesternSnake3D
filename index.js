@@ -3,7 +3,6 @@ var http = require("http")
 var express = require("express")
 var app = express()
 var port = process.env.PORT || 5000
-var form = document.getElementById('message-form');
 
 app.use(express.static(__dirname + "/"))
 
@@ -123,23 +122,3 @@ function Winner(){
 
     return value;
 }
-
-// Send a message when the form is submitted.
-form.onsubmit = function(e) {
-	e.preventDefault();
-
-	// Retrieve the message from the textarea.
-	var message = messageField.value;
-
-	// Send the message through the WebSocket.
-	socket.send(message);
-
-	// Add the message to the messages list.
-	messagesList.innerHTML += '<li class="sent"><span>Sent:</span>' + message +
-	                          '</li>';
-
-	// Clear out the message field.
-	messageField.value = '';
-
-	return false;
-};
