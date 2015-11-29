@@ -56,10 +56,10 @@ wss.on('connection', function connection(ws) {
 // select next move every 10 seconds and reset scores
 setInterval(function()
 {
+    results.message = getWinner();
+    ResetVotes();
     wss.clients.forEach(function each(client) 
     {
-      results.message = getWinner();
-      ResetVotes();
       client.send(JSON.stringify(results));
     });
 }, 10000);
