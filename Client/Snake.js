@@ -11,6 +11,11 @@ server.listen(1337, '127.0.0.1', function(data){
 });
 
 
+server.on('data', function(data){
+  console.log(data)
+});
+
+
 /*
 var spawn = require('child_process').spawn;
 var PythonShell = require('python-shell');
