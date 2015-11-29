@@ -41,12 +41,11 @@ console.log('stdout: ' + data);
 ls.stderr.on('data', function (data) {
 console.log('stderr: ' + data);
 });
-*/
-/*
+
 var PythonShell = require('python-shell');
 var pyshell = new PythonShell('Myo4Linux/lib/device_listener.py');
 >>>>>>> origin/master
-*/
+
 var serialPort = new SerialPort("/dev/ttyACM0", {
   baudrate: 9600
 });
@@ -59,20 +58,20 @@ serialPort.on("open", function () {
   canWrite = true;
 });
 
-
+/*
 var ws = require("nodejs-websocket");
 var wsConnected = ws.connect("ws://websocket-nodejs.herokuapp.com", function(wss)
 {
-	console.log("connect to websocket");
+	//console.log("connect to websocket");
 });
 
 wsConnected.on('connect', function() {
-	console.log('Connection established');
+	//console.log('Connection established');
 
 	wsConnected.on('text', function incoming(message) {
 
 
-		console.log('received: %s', message);
+		//console.log('received: %s', message);
 
 		switch(message)
 		{
@@ -101,7 +100,7 @@ wsConnected.on('connect', function() {
 			serialPort.write(message, function(err, results) {
 		    	console.log('err ' + err);
 		    	console.log('results ' + results);
-			});*/
+			});
 	});
 });
 
@@ -197,8 +196,8 @@ setInterval(function()
 	}
 	else
 	{
-		serialPort.write(total);
-		console.log("sending : %s", total);
+		///serialPort.write(total);
+		//console.log("sending : %s", total);
 	}
   }
 }, 3000);
