@@ -59,8 +59,8 @@ setInterval(function()
     wss.clients.forEach(function each(client) 
     {
       results.message = getWinner();
-      client.send(JSON.stringify(results));
       ResetVotes();
+      client.send(JSON.stringify(results));
     });
 }, 10000);
 
