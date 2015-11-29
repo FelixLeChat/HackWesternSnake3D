@@ -58,16 +58,16 @@ wsConnected.on('connect', function() {
 				}
 				break;
 			case "forward":
-				if(direction.x != -1)
+				if(direction.x != 1)
 				{
 					direction = {x:1,y:0,z:0};
 					Update();
 				}
 				break;
 			case "backward":
-				if(direction.x != 1)
+				if(direction.x != -1)
 				{
-					direction = {x:-1,y:0,z:0};
+					direction = {x:1,y:0,z:0};
 					Update();
 				}
 				break;
