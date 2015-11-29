@@ -116,39 +116,38 @@ wss.on('connection', function connection(ws) {
 		socketStatus.className = 'closed';
 	};
 
-	// Send a message when the form is submitted.
-	form.onsubmit = function(e) {
-		e.preventDefault();
-
-		// Retrieve the message from the textarea.
-		var message = messageField.value;
-
-		// Send the message through the WebSocket.
-		ws.send(message);
-
-		// Add the message to the messages list.
-		messagesList.innerHTML += '<li class="sent"><span>Sent:</span>' + message +
-		                          '</li>';
-
-		// Clear out the message field.
-		messageField.value = '';
-
-		return false;
-	};
-
-
-	// Close the WebSocket connection when the close button is clicked.
-	closeBtn.onclick = function(e) {
-		e.preventDefault();
-
-		// Close the WebSocket.
-		ws.close();
-
-		return false;
-	};
-
 });
 
+// Send a message when the form is submitted.
+form.onsubmit = function(e) {
+	e.preventDefault();
+
+	// Retrieve the message from the textarea.
+	var message = messageField.value;
+
+	// Send the message through the WebSocket.
+	ws.send(message);
+
+	// Add the message to the messages list.
+	messagesList.innerHTML += '<li class="sent"><span>Sent:</span>' + message +
+	                          '</li>';
+
+	// Clear out the message field.
+	messageField.value = '';
+
+	return false;
+};
+
+
+// Close the WebSocket connection when the close button is clicked.
+closeBtn.onclick = function(e) {
+	e.preventDefault();
+
+	// Close the WebSocket.
+	ws.close();
+
+	return false;
+};
 
 setInterval(function()
 {
