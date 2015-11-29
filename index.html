@@ -1,6 +1,7 @@
 <html>
     <head>
-    <script src="script/jquery-1.11.3.min.js"></script>
+        <script src="script/jquery-1.11.3.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <style>
             body {
                 font-family: "Helvetica Neue", helvetica, arial;
@@ -25,14 +26,40 @@
                 var data = JSON.parse(event.data);
                 $("#up").htlm(data.up);
                 $("#down").html(data.down);
+                $("#left").html(data.left);
+                $("#right").html(data.right);
+                $("#forward").html(data.forward);
+                $("#backward").html(data.backwards);
             };
         </script>
     </head>
+
     <body>
-    <h1>Snake</h1>        
-        <ul id='votes'>
-            <li id="up"></li>
-            <li id="down"></li>
-        </ul>
+        <div class="container">
+            <h2>Votes</h2>
+            <p>Votes are compiled every 10 seconds and sent to the cube!</p>            
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>up</th>
+                    <th>down</th>
+                    <th>left</th>
+                    <th>right</th>
+                    <th>forward</th>
+                    <th>backward</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="up"></td>
+                    <td id="down"></td>
+                    <td id="left"></td>
+                    <td id="right"></td>
+                    <td id="forward"></td>
+                    <td id="backward"></td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
     </body>
 </html>
