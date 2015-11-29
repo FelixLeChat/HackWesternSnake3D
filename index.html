@@ -51,7 +51,7 @@
 				ml4.innerHTML = ml3.innerHTML;
 				ml3.innerHTML = ml2.innerHTML;
 				ml2.innerHTML = ml1.innerHTML;
-				ml1.innerHTML = data.message;
+				ml1.innerHTML = "<span>Received:</span>" + data.message;
 			
 				upResult.innerHTML = data.up;
 				downResult.innerHTML = data.down;
@@ -166,11 +166,11 @@
 	</tbody>
 	</table>
 	<ul id="messages">
-		<li class="received" id='messageList1'><span>Received:</span></li>
-		<li class="received" id='messageList2'><span>Received:</span></li>
-		<li class="received" id='messageList3'><span>Received:</span></li>
-		<li class="received" id='messageList4'><span>Received:</span></li>
-		<li class="received" id='messageList5'><span>Received:</span></li>
+		<li class="received" id='messageList1'>/li>
+		<li class="received" id='messageList2'></li>
+		<li class="received" id='messageList3'></li>
+		<li class="received" id='messageList4'></li>
+		<li class="received" id='messageList5'></li>
 	</ul>
 </div>
 
