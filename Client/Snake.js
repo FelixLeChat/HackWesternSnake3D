@@ -8,6 +8,7 @@ var server = net.createServer(function(socket){
     socket.on('data', function(data){
 
 		data = decodeURIComponent(escape(data.toLowerCase()));
+		data = data.replace(/(\r\n|\n|\r)/gm,"");
     	console.log(data);
     	switch(data)
 		{
