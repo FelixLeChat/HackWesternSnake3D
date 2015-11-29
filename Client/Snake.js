@@ -19,7 +19,7 @@ var server = net.createServer(function(socket){
 					Update();
 				}
 				break;
-			case "finger_spread":
+			case "fingers_spread":
 				if(direction.z != 1)
 				{
 					direction = {x:0,y:0,z:-1};
