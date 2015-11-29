@@ -46,7 +46,7 @@ wss.on('connection', function connection(ws) {
 
     wss.clients.forEach(function each(client) 
     {
-      results.message = message.toUpperCase();
+      results.message = "registered a vote for " + message.toUpperCase();
       client.send(JSON.stringify(results));
     });
   });
