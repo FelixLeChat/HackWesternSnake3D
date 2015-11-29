@@ -62,7 +62,7 @@ setInterval(function()
     {
       client.send(JSON.stringify(results));
     });
-}, 10000);
+}, 5000);
 
 function getWinner()
 {
