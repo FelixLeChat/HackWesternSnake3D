@@ -24,7 +24,7 @@
 
 			// Show a connected message when the WebSocket is opened.
 			socket.onopen = function(event) {
-				socketStatus.innerHTML = 'Connected to server';
+				socketStatus.innerHTML = 'Connected to server.';
 				socketStatus.className = 'open';
 			};
 
@@ -56,22 +56,16 @@
 				switch(message)
 				{
 				case "up":
-					results.up++;
 					break;
 				case "down":
-					results.down++;
 					break;
 				case "left":
-					results.left++;
 					break;
 				case "right":
-					results.right++;
 					break;
 				case "forward":
-					results.forward++;
 					break;
 				case "backward":
-					results.backward++;
 					break;
 				default:
 					received = false;
@@ -90,7 +84,7 @@
 				
 				// Clear out the message field.
 				messageField.value = '';
-				
+
 				return false;
 			};
 
