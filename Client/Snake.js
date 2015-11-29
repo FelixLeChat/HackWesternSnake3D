@@ -6,37 +6,40 @@ var server = net.createServer(function(socket){
     socket.write('Echo server\r\n');
     socket.pipe(socket);
     socket.on('data', function(data){
+
+		data = data.toLowerCase();
+    	console.log(data);
     	switch(data)
 		{
-			case "up":
+			case "fist":
 				if(direction.z != -1)
 				{
 					direction = {x:0,y:0,z:1};
 					Update();
 				}
 				break;
-			case "down":
+			case "finger_spread":
 				if(direction.z != 1)
 				{
 					direction = {x:0,y:0,z:-1};
 					Update();
 				}
 				break;
-			case "left":
+			case "wave_in":
 				if(direction.y != 1)
 				{
 					direction = {x:0,y:-1,z:0};
 					Update();
 				}
 				break;
-			case "right":
+			case "wave_out":
 				if(direction.y != -1)
 				{
 					direction = {x:0,y:1,z:0};
 					Update();
 				}
 				break;
-			case "forward":
+			/*case "forward":
 				if(direction.x != 1)
 				{
 					direction = {x:1,y:0,z:0};
@@ -49,7 +52,7 @@ var server = net.createServer(function(socket){
 					direction = {x:1,y:0,z:0};
 					Update();
 				}
-				break;
+				break;*/
 		};
     });
 
