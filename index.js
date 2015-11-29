@@ -1,3 +1,4 @@
+
 window.onload = function() {
 
   // Get references to elements on the page.
@@ -37,8 +38,7 @@ window.onload = function() {
     socketStatus.innerHTML = 'Disconnected from WebSocket.';
     socketStatus.className = 'closed';
   };
-
-
+  
   // Send a message when the form is submitted.
   form.onsubmit = function(e) {
     e.preventDefault();
