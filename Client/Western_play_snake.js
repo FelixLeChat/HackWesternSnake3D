@@ -27,11 +27,6 @@ wsConnected.on('connect', function() {
 
 		console.log('received: %s', message);
 
-		// Hack pour Max
-		var result = message.split(":");
-		if(result.length == 2)
-			message = result[1];
-
 		switch(message)
 		{
 			case "up":

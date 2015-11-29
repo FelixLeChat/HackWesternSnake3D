@@ -9,6 +9,7 @@
 			var socketStatus = document.getElementById('status');
 			var closeBtn = document.getElementById('close');
 			var updateStatus = document.getElementById('update');
+			var winner = document.getElementById('winner');
 
 			// result references
 			var upResult = document.getElementById('up');
@@ -47,19 +48,24 @@
 			socket.onmessage = function(event) {
 				var data = JSON.parse(event.data);
 
-				// iteratively update list
-				ml5.innerHTML = ml4.innerHTML;
-				ml4.innerHTML = ml3.innerHTML;
-				ml3.innerHTML = ml2.innerHTML;
-				ml2.innerHTML = ml1.innerHTML;
-				ml1.innerHTML = "<span>Received:</span>" + data.message;
-			
-				upResult.innerHTML = data.up;
-				downResult.innerHTML = data.down;
-				leftResult.innerHTML = data.left;
-				rightResult.innerHTML = data.right;
-				forwardResult.innerHTML = data.forward;
-				backwardResult.innerHTML = data.backward;
+				if(data.message.indexOf("WINNER:") > -1) {
+					var result = data.message.split(":");
+					winner.innerHTML = result[1];
+				} else {
+					// iteratively update list
+					ml5.innerHTML = ml4.innerHTML;
+					ml4.innerHTML = ml3.innerHTML;
+					ml3.innerHTML = ml2.innerHTML;
+					ml2.innerHTML = ml1.innerHTML;
+					ml1.innerHTML = "<span>Received:</span>" + data.message;
+				
+					upResult.innerHTML = data.up;
+					downResult.innerHTML = data.down;
+					leftResult.innerHTML = data.left;
+					rightResult.innerHTML = data.right;
+					forwardResult.innerHTML = data.forward;
+					backwardResult.innerHTML = data.backward;
+				}
 			};
 
 
@@ -147,6 +153,7 @@
 	</form>
 </div>
 <div id="page-wrapper">
+	<div id="winner">Previous democratic decision</div>
 	<table cellspacing='0'> 
 	<thead>
 		<tr>

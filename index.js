@@ -53,70 +53,63 @@ wss.on('connection', function connection(ws) {
 
 });
 
-// // update score values every .5 seconds
-// setInterval(function()
-// {
-//     wss.clients.forEach(function each(client) 
-//     {
-//         client.send(JSON.stringify(results));
-//     });
-// }, 500);
+// select next move every 10 seconds and reset scores
+setInterval(function()
+{
+    wss.clients.forEach(function each(client) 
+    {
+      results.message = getWinner();
+      client.send(JSON.stringify(results));
+      ResetVotes();
+    });
+}, 10000);
 
-// // select next move every 10 seconds and reset scores
-// setInterval(function()
-// {
-//     wss.clients.forEach(function each(client) 
-//     {
-//         client.send(getWinner());
-//         ResetVotes();
-//     });
-// }, 10000);
+function getWinner()
+{
+  var max = 0;
+  var value = "";
 
-// function getWinner()
-// {
-//     var max = 0;
-//     var value = "";
-    
-//     if(results.up > max)
-//     {
-//         value = "up";
-//         max = value.up;
-//     }
-//     if(results.down > max)
-//     {
-//         value = "down";
-//         max = value.down;
-//     }
-//     if(results.left > max)
-//     {
-//         value = "left";
-//         max = value.left;
-//     }
-//     if(results.right > max)
-//     {
-//         value = "right";
-//         max = value.right;
-//     }
-//     if(results.forward > max)
-//     {
-//         value = "forward";
-//         max = value.forward;
-//     }
-//     if(results.backward > max)
-//     {
-//         value = "backward";
-//         max = value.backward;
-//     }
+  if(results.up > max)
+  {
+      value = "up";
+      max = value.up;
+  }
+  if(results.down > max)
+  {
+      value = "down";
+      max = value.down;
+  }
+  if(results.left > max)
+  {
+      value = "left";
+      max = value.left;
+  }
+  if(results.right > max)
+  {
+      value = "right";
+      max = value.right;
+  }
+  if(results.forward > max)
+  {
+      value = "forward";
+      max = value.forward;
+  }
+  if(results.backward > max)
+  {
+      value = "backward";
+      max = value.backward;
+  }
 
-//     return value;
-// }
+  var ret = "WINNER:" + value;
+  return ret;
+}
 
-// function ResetVotes()
-// {
-//  results.up = 0;
-//  results.down = 0;
-//  results.left = 0;
-//  results.right = 0;
-//  results.forward = 0;
-//  results.backward = 0;
-// }
+function ResetVotes()
+{
+  results.up = 0;
+  results.down = 0;
+  results.left = 0;
+  results.right = 0;
+  results.forward = 0;
+  results.backward = 0;
+}
