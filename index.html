@@ -78,7 +78,8 @@
 					updateStatus.className = 'open';
 					setTimeout(function() {
 					    updateStatus.innerHTML = 'Waiting for input...';
-					}, 1500); 
+					    updateStatus.className = 'normal';
+					}, 2000); 
 					// Send the message through the WebSocket.
 					socket.send(message);
 				} else {

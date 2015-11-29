@@ -36,6 +36,9 @@ h1 {
   color: red;
 }
 
+.normal {
+  color: black;
+}
 
 ul {
   list-style: none;
