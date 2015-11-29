@@ -14,7 +14,7 @@ console.log("http server listening on %d", port)
 var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
-var results = {up:0, down:0, left:0, right:0, forward:0, backward:0};
+var results = {up:0, down:0, left:0, right:0, forward:0, backward:0, message};
 
 wss.on('connection', function connection(ws) {
 
@@ -46,21 +46,21 @@ wss.on('connection', function connection(ws) {
 
     wss.clients.forEach(function each(client) 
     {
-      message = message.toUpperCase();
-      client.send("registered a vote for " + message);
+      results.message = message.toUpperCase();
+      client.send(JSON.stringify(results));
     });
   });
 
 });
 
-// update score values every .5 seconds
-setInterval(function()
-{
-    wss.clients.forEach(function each(client) 
-    {
-        client.send(JSON.stringify(results));
-    });
-}, 500);
+// // update score values every .5 seconds
+// setInterval(function()
+// {
+//     wss.clients.forEach(function each(client) 
+//     {
+//         client.send(JSON.stringify(results));
+//     });
+// }, 500);
 
 // // select next move every 10 seconds and reset scores
 // setInterval(function()
