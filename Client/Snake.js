@@ -1,10 +1,22 @@
 var SerialPort = require("serialport").SerialPort;
 var spawn = require('child_process').spawn;
 var PythonShell = require('python-shell');
-var pyshell = new PythonShell('/Myo4Linux/sample/test_myo.py');
-pyshell.on('message', function (message) {
-  // received a message sent from the Python script (a simple "print" statement)
-  console.log(message);
+describe('PythonShell', function () {
+  PythonShell.defaultOptions = {
+    scriptPath: './Myo4Linux/sample/test_myo.py'
+  };
+
+      describe('#ctor(script, options)', funcion(){
+        it('should spawn process', function (done) {
+            var pyshell = new PythonShell('/Myo4Linux/sample/test_myo.py');
+            pyshell.command.should.eql(['test/python/exit-code.py']);
+            pyshell.terminated.should.be.false;
+            pyshell.end(function (err) {
+                 if (err) return done(err);
+                 pyshell.terminated.should.be.true;
+                 done();
+      });
+  });
 });
 
 //var ls = spawn('python',['/Myo4Linux/sample/test_myo.py']);
@@ -188,7 +200,9 @@ function isHittingItself()
 	return false;
 }
 
+/*
 pyshell.end(function(err){
 	//if(err) throw err;
 	console.log("finished Python script");
 });
+*/
