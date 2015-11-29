@@ -16,6 +16,7 @@ console.log("websocket server created")
 
 
 var results = {up:0, down:0, left:0, right:0, forward:0, backward:0};
+var isRaspberryPi = false;
 
 wss.on('connection', function connection(ws) {
 

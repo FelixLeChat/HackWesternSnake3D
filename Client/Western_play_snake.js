@@ -179,3 +179,5 @@ function isHittingItself()
 			return true;
 	return false;
 }
+
+Update();
