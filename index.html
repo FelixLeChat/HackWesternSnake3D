@@ -76,6 +76,9 @@
 				{
 					updateStatus.innerHTML = "Vote successful!";
 					updateStatus.className = 'open';
+					setTimeout(function() {
+					    $('#update').fadeOut('fast');
+					}, 1500); // <-- time in milliseconds
 					// Send the message through the WebSocket.
 					socket.send(message);
 				} else {
