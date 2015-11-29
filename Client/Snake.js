@@ -2,6 +2,7 @@ var SerialPort = require("serialport").SerialPort;
 var net = require('net');
 
 var server = net.createServer(function(socket){
+    socket.setEncoding("utf8")
     socket.write('Echo server\r\n');
     socket.pipe(socket);
     socket.on('data', function(data){
