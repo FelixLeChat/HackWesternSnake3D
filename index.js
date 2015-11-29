@@ -19,10 +19,10 @@ var results = {up:0, down:0, left:0, right:0, forward:0, backward:0};
 
 wss.on('connection', function connection(ws) {
 
-  ws.on('message', function incoming(message) 
+  ws.onmessage = function(message) 
   {
       var received = true;
-      message = message.toLowerCase();
+      message = message.data.toLowerCase();
 
       switch(message)
       {
@@ -59,10 +59,6 @@ wss.on('connection', function connection(ws) {
         else
             ws.send("vote not compiled : " + message + " is invalid");
   });
-
-    ws.send('Connected to voting channel');
-    ws.send("Choices : up, down, left, right, forward, backward");
-
 });
 
 
