@@ -6,16 +6,24 @@
 			// Get references to elements on the page.
 			var form = document.getElementById('message-form');
 			var messageField = document.getElementById('message');
-			var messagesList = document.getElementById('messages');
 			var socketStatus = document.getElementById('status');
 			var closeBtn = document.getElementById('close');
 			var updateStatus = document.getElementById('update');
+
+			// result references
 			var upResult = document.getElementById('up');
 			var downResult = document.getElementById('down');
 			var leftResult = document.getElementById('left');
 			var rightResult = document.getElementById('right');
 			var forwardResult = document.getElementById('forward');
 			var backwardResult = document.getElementById('backward');
+
+			// last inserted references
+			var ml1 = document.getElementById('messageList1');
+			var ml2 = document.getElementById('messageList2');
+			var ml3 = document.getElementById('messageList3');
+			var ml4 = document.getElementById('messageList4');
+			var ml5 = document.getElementById('messageList5');
 
 
 			// Create a new WebSocket.
@@ -39,7 +47,12 @@
 			socket.onmessage = function(event) {
 				var data = JSON.parse(event.data);
 
-				messagesList.innerHTML += '<li class="received"><span>Received:</span>' + data.message + '</li>';
+				// iteratively update list
+				ml5.innerHTML = ml4.innerHTML;
+				ml4.innerHTML = ml3.innerHTML;
+				ml3.innerHTML = ml2.innerHTML;
+				ml2.innerHTML = ml1.innerHTML;
+				ml1.innerHTML = "<span>Received:</span>" + data.message;
 			
 				upResult.innerHTML = data.up;
 				downResult.innerHTML = data.down;
@@ -148,17 +161,23 @@
 
 	<tbody>
 		<tr>
-			<td id='up'></td>
-			<td id='down'></td> 
-			<td id='left'></td>
-			<td id='right'></td>
-			<td id='forward'></td> 
-			<td id='backward'></td>
+			<td id='up'>&nbsp</td>
+			<td id='down'>&nbsp</td> 
+			<td id='left'>&nbsp</td>
+			<td id='right'>&nbsp</td>
+			<td id='forward'>&nbsp</td> 
+			<td id='backward'>&nbsp</td> 
 		</tr>
 
 	</tbody>
 	</table>
-	<ul id="messages"></ul>
+	<ul id="messages">
+		<li class="received" id='messageList1'>&nbsp</li>
+		<li class="received" id='messageList2'>&nbsp</li>
+		<li class="received" id='messageList3'>&nbsp</li>
+		<li class="received" id='messageList4'>&nbsp</li>
+		<li class="received" id='messageList5'>&nbsp</li>
+	</ul>
 </div>
 
 <!-- <html>
