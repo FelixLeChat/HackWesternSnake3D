@@ -1,38 +1,28 @@
-# node-js-getting-started
+# node-js Heroku Server
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
-
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
-
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-## Running Locally
+Node.js app act as a voting server that gather all votes and broadcast the result each 5 sec.
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku Toolbelt](https://toolbelt.heroku.com/) installed.
-
+run locally
 ```sh
-$ git clone git@github.com:heroku/node-js-getting-started.git # or clone your own fork
-$ cd node-js-getting-started
+$ git clone git@github.com:heroku/HackWestern-Snake3D.git # or clone your own fork
+$ cd HackWestern-Snake3D
 $ npm install
 $ npm start
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+## Running Locally on the raspberry Pi
 
-## Deploying to Heroku
+in Client folder
 
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
+Western_play_snake.js
+Local server that register to the Heroku server and receive the vote each 5 sec. It will update the LED cube when the snake moves.
 
-## Documentation
+Snake.js
+Local server that register to the Myo output and mode the snake in the 3D LED cube.
 
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [Getting Started with Node.js on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
+You need to run after:
+  myo_connector.py // watch the myo output
+  test_myo.py // connect and start streaming on local port
