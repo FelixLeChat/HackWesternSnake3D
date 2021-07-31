@@ -7,9 +7,9 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "ejs": "2.3.3",
+    "ejs": ">=2.5.5",
     "express": "4.13.3",
-    "ws": "^0.8.0"
+    "ws": ">=5.2.3"
   },
   "engines": {
     "node": "0.12.7"
